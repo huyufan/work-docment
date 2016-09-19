@@ -1,5 +1,4 @@
 chrome://version/
-echo
 
 在chrome下清除DNS缓存方法：
 1、用chrome打开：chrome://net-internals/#dns
