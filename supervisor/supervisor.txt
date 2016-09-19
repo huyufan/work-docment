@@ -1,0 +1,66 @@
+https://segmentfault.com/a/1190000003040086
+
+http://www.tuicool.com/articles/Ejm2u2
+
+supervisord : supervisor的服务器端部分，启动supervisor就是运行这个命令
+
+
+supervisord  -c /etc/supervisor.conf
+supervisorctl：启动supervisor的命令行窗口。
+
+安装（Centos）：
+
+# yum install python-setuptools
+# easy_install supervisor
+如果easy_install不好使就从官方下载：
+然后通过python安装：
+# tar zxf supervisor-3.1.3.tar.gz
+# cd supervisor
+# python setup.py install
+
+成功安装后可以登陆python控制台输入import supervisor 查看是否能成功加载。
+
+生成配置文件(supervisord.conf)：
+
+echo_supervisord_conf > /etc/supervisord.conf
+
+
+[配置文件]
+
+[root@vm source]# echo_supervisord_conf > /etc/supervisord.conf
+[监视一个程序]
+
+; The [include] section can just contain the "files" setting.  This
+; setting can list multiple files (separated by whitespace or
+; newlines).  It can also contain wildcards.  The filenames are
+; interpreted as relative to this file.  Included files *cannot*
+; include files themselves.
+
+[include] /**我是注释，一定要把前面的分号;去掉，不然不会开启include功能，太傻了**/
+files = /etc/supervisor/*.ini
+在 /etc/supervisor/ 目录下建立 redis.ini 文件
+
+[program:redis]
+command=/usr/bin/redis-server /usr/local/redis/redis.conf
+autorstart=true
+autorestart=true
+stdout_logfile=/tmp/supervisor.log
+[Web配置]
+
+[inet_http_server]         ; inet (TCP) server disabled by default
+port=*:9001        ; (ip_address:port specifier, *:port for all iface)
+;username=user              ; (default is no username (open server))
+;password=123               ; (default is no password (open server))
+
+
+
+
+  [root@vm source]# ps -ef ｜grep supervisord
+  root     20041     1  0 03:21 ?        00:00:00 /usr/bin/python /usr/bin/supervisord
+
+  [root@vm source]# ps -ef| grep redis
+  root     20074 20073  0 03:23 ?        00:00:00 /usr/bin/redis-server *:6379
+
+
+[root@vm source]# supervisorctl status
+redis                            RUNNING   pid 20074, uptime 0:13:25

@@ -1,0 +1,4 @@
+mysqldump -uroot -p111111 数据库  > 文件
+
+
+source /文件

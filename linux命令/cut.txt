@@ -1,0 +1,10 @@
+cut命令 cut命令可以让你用列或者分隔符提取文件中的指定部分。
+如果你要列出文件中某列的全部内容，可以使用“-c”选项。例如，
+下面将从test.txt文件中提取第1、2列的全部内容。 
+cut -c1-2 test.txt root@devopscube:~# 
+cut -c1-2 test.txt 1 10 45 4 7 58 
+如果你希望从文件中提取指定的字符串，那么你可以使用分隔符选项“-d”和“-f”选项选中列。
+例如，我们可以利用cut命令提取names列：
+
+ root@devopscube:~# cut -d' ' -f2 test.txt mike lucy Dave dennis Megan Mathew 
+下面的例子从/etc/passd file中提取users列： cut -d':' -f1 /etc/passwd

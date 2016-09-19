@@ -1,0 +1,6 @@
+select * from biao  into outfile 'tmp/d.txt';
+
+load data infile 'tmp/d.txt' into table  biao;
+
+
+ --local-infile=1

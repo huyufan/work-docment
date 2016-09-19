@@ -1,0 +1,234 @@
+wget -c https://download.samba.org/pub/rsync/src/rsync-3.1.2.tar.gz
+
+
+./configure --prefix=/usr/local/rsync --disable-ipv6
+
+
+http://www.yunwei8.com/rsync/
+
+三：配置：
+Rsync server：
+默认安装完没有配置文件：
+#  mkdir  /usr/local/server/rsync/logs 
+#  mkdir /usr/local/server/rsync/etc 
+#  mkdir /usr/local/server/rsync/run
+
+添加主配置文件：
+#  vi /usr/local/server/rsync/etc/rsyncd.conf
+
+复制以下代码
+uid = root
+gid = root
+port = 873
+use chroot = no
+hosts allow = 192.168.0.203
+pid file = /usr/local/server/rsync/run/rsyncd.pid
+lock file = /usr/local/server/rsync/run/rsync.lock
+log file = /usr/local/server/rsync/logs/rsyncd.log
+ignore errors 
+
+[yunwei8]
+path = /web/www
+auth users = yunwei8
+secrets file = /usr/local/server/rsync/rsyncd.pass
+read only = no
+
+添加密码文件：
+#  vi /usr/local/server/rsync/rsyncd.pass
+
+格式如下：用户名:密码
+yunwei8:yunwei8
+
+修改权限：
+#  chmod 600 /usr/local/server/rsync/rsyncd.pass
+
+启动rsync服务：
+#  rsync  --daemon --config=/usr/local/server/rsync/etc/rsyncd.conf
+
+
+
+
+
+
+
+rsync client配置
+添加密码文件并赋予权限：(里面只写入密码即可)
+#  vi /root/rsyncd.pass 
+yunwei8
+#  chmod 600 /root/rsyncd.pass
+
+然后只要在客户机执行如下命令就能同步文件了：
+#  rsync -arP --password-file=/root/rsyncd.pass yunwei8@192.168.0.201::yunwei8 /web/www
+-a   --archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD
+-r --recursive 对子目录以递归模式处理
+-P --perms 保持文件权限
+--password-file  密码
+
+
+
+3. 使用 rsync 命令连接服务器,实现文件同步
+ rsync -vzrtopg --progress --delete --password-file=/etc/rsync_client.pass backup@192.168.1.2::web /opt/web
+下面这个是增量备份
+rsync -rvlHpogDtS --progress --delete --password-file=/etc/rsync_client.pass backup@192.168.1.2::web /data/backup/rsy248rcfile
+ 
+4. 使用 --execlude= 排除不需要同步的文件后缀名
+rsync -vzrtopg --progress --delete --password-file=/etc/rsync_client.pass --exclude="*.tmp" backup@192.168.1.2::web /opt/web
+ 
+5. 使用 --execlude-from= 排除不需要同步的目录
+[root@ASB opt]# rsync -vzrtopg --progress --delete --password-file=/etc/rsync_client.pass --exclude-from=/opt/pcdir backup@192.168.1.2::web /opt/web
+
+
+  -vzrtopg里的
+             v是verbose，
+             z是压缩，
+             r是recursive，
+             topg都是保持文件原有属性如属主、时间的参数
+   ----progress
+              是指显示出详细的进度情况
+    --delete  
+             是指如果服务器端删除了这一文件，那么客户端也相应把文件删除，保持真正的一致             
+   --exclude="*.tmp"
+                 不包含某些文件  
+   --execlude-from= 排除不需要同步的目录
+   --password-file
+                 指定CLIENT端密码文件存放路径
+     /opt/web/  
+                  指定CLIENT端存放镜象目的路径
+ 
+
+-v, --verbose 详细模式输出
+-q, --quiet 精简输出模式
+-c, --checksum 打开校验开关，强制对文件传输进行校验
+-a, --archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD
+-r, --recursive 对子目录以递归模式处理
+-R, --relative 使用相对路径信息
+
+
+-b, --backup 创建备份，也就是对于目的已经存在有同样的文件名时，将老的文件重新命名为~filename。可以使用--suffix选项来指定不同的备份文件前缀。
+--backup-dir 将备份文件(如~filename)存放在在目录下。
+-suffix=SUFFIX 定义备份文件前缀
+-u, --update 仅仅进行更新，也就是跳过所有已经存在于DST，并且文件时间晚于要备份的文件。(不覆盖更新的文件)
+-l, --links 保留软链结
+-L, --copy-links 想对待常规文件一样处理软链结
+--copy-unsafe-links 仅仅拷贝指向SRC路径目录树以外的链结
+--safe-links 忽略指向SRC路径目录树以外的链结
+-H, --hard-links 保留硬链结
+-p, --perms 保持文件权限
+-o, --owner 保持文件属主信息
+-g, --group 保持文件属组信息
+-D, --devices 保持设备文件信息
+-t, --times 保持文件时间信息
+-S, --sparse 对稀疏文件进行特殊处理以节省DST的空间
+-n, --dry-run现实哪些文件将被传输
+-W, --whole-file 拷贝文件，不进行增量检测
+-x, --one-file-system 不要跨越文件系统边界
+-B, --block-size=SIZE 检验算法使用的块尺寸，默认是700字节
+-e, --rsh=COMMAND 指定替代rsh的shell程序
+--rsync-path=PATH 指定远程服务器上的rsync命令所在路径信息
+-C, --cvs-exclude 使用和CVS一样的方法自动忽略文件，用来排除那些不希望传输的文件
+--existing 仅仅更新那些已经存在于DST的文件，而不备份那些新创建的文件
+--delete 删除那些DST中SRC没有的文件
+--delete-excluded 同样删除接收端那些被该选项指定排除的文件
+--delete-after 传输结束以后再删除
+--ignore-errors 及时出现IO错误也进行删除
+--max-delete=NUM 最多删除NUM个文件
+--partial 保留那些因故没有完全传输的文件，以是加快随后的再次传输
+--force 强制删除目录，即使不为空
+--numeric-ids 不将数字的用户和组ID匹配为用户名和组名
+--timeout=TIME IP超时时间，单位为秒
+-I, --ignore-times 不跳过那些有同样的时间和长度的文件
+--size-only 当决定是否要备份文件时，仅仅察看文件大小而不考虑文件时间
+--modify-window=NUM 决定文件是否时间相同时使用的时间戳窗口，默认为0
+-T --temp-dir=DIR 在DIR中创建临时文件
+--compare-dest=DIR 同样比较DIR中的文件来决定是否需要备份
+-P 等同于 --partial
+--progress 显示备份过程
+-z, --compress 对备份的文件在传输时进行压缩处理
+--exclude=PATTERN 指定排除不需要传输的文件模式
+--include=PATTERN 指定不排除而需要传输的文件模式
+--exclude-from=FILE 排除FILE中指定模式的文件
+--include-from=FILE 不排除FILE指定模式匹配的文件
+--version 打印版本信息
+--address 绑定到特定的地址
+--config=FILE 指定其他的配置文件，不使用默认的rsyncd.conf文件
+--port=PORT 指定其他的rsync服务端口
+--blocking-io 对远程shell使用阻塞IO
+-stats 给出某些文件的传输状态
+--progress 在传输时现实传输过程
+--log-format=formAT 指定日志文件格式
+--password-file=FILE 从FILE中得到密码
+--bwlimit=KBPS 限制I/O带宽，KBytes per second
+-h, --help 显示帮助信息
+
+
+6.2 rsync 客户端同步数据；
+[beinan@beinnaIBM:~]$ rsync -avzP linuxsir@linuxsir.org::linuxsirhome   linuxsirhome 
+Password: 这里要输入linuxsir的密码，是服务器端提供的，在前面的例子中，我们用的是 222222，输入的密码并不显示出来；输好后就回车；
+注： 这个命令的意思就是说，用linuxsir 用户登录到服务器上，把linuxsirhome数据，同步到本地目录linuxsirhome上。当然本地的目录是可以你自己定义的，比如 linuxsir也是可以的；当你在客户端上，当前操作的目录下没有linuxsirhome这个目录时，系统会自动为你创建一个；当存在linuxsirhome这个目录中，你要注意它的写权限。
+说明：
+-a 参数，相当于-rlptgoD，-r 是递归 -l 是链接文件，意思是拷贝链接文件；-p 表示保持文件原有权限；-t 保持文件原有时间；-g 保持文件原有用户组；-o 保持文件原有属主；-D 相当于块设备文件；
+-z 传输时压缩；
+-P 传输进度；
+-v 传输时的进度等信息，和-P有点关系，自己试试。可以看文档；
+[beinan@beinnaIBM:~]$ rsync -avzP --delete linuxsir@linuxsir.org::linuxsirhome   linuxsirhome
+这回我们引入一个 --delete 选项，表示客户端上的数据要与服务器端完全一致，如果 linuxsirhome目录中有服务器上不存在的文件，则删除。最终目的是让linuxsirhome目录上的数据完全与服务器上保持一致；用的时候要小心点，最好不要把已经有重要数所据的目录，当做本地更新目录，否则会把你的数据全部删除；
+[beinan@beinnaIBM:~]$ rsync -avzP --delete --password-file=rsync.password linuxsir@linuxsir.org::linuxsirhome   linuxsirhome
+这次我们加了一个选项 --password-file=rsync.password ，这是当我们以linuxsir用户登录rsync服务器同步数据时，密码将读取 rsync.password 这个文件。这个文件内容只是linuxsir用户的密码。我们要如下做；
+[beinan@beinnaIBM:~]$ touch rsync.password 
+[beinan@beinnaIBM:~]$ chmod 600 rsync.passwod
+[beinan@beinnaIBM:~]$ echo "222222"> rsync.password
+
+[beinan@beinnaIBM:~]$ rsync -avzP --delete --password-file=rsync.password linuxsir@linuxsir.org::linuxsirhome   linuxsirhome
+注： 这样就不需要密码了；其实这是比较重要的，因为服务器通过crond 计划任务还是有必要的；
+
+
+
+
+6.3 让rsync 客户端自动与服务器同步数据；
+服务器是重量级应用，所以数据的网络备份还是极为重要的。我们可以在生产型服务器上配置好rsync 服务器。我们可以把一台装有rysnc机器当做是备份服务器。让这台备份服务器，每天在早上4点开始同步服务器上的数据；并且每个备份都是完整备份。有时硬盘坏掉，或者服务器数据被删除，完整备份还是相当重要的。这种备份相当于每天为服务器的数据做一个镜像，当生产型服务器发生事故时，我们可以轻松恢复数据，能把数据损失降到最低；是不是这么回事？个人认为可直接将计划任务写进crontab里,免得写脚本,这样可简化操作,当然北南南北大哥的方法更全面,这个看大家的工作需要了.
+第一步：创建同步脚本和密码文件
+
+[beinan@beinnaIBM:~] mkdir   /etc/cron.daily.rsync
+[beinan@beinnaIBM:~] cd /etc/cron.daily.rsync 
+[beinan@beinnaIBM:~] touch linuxsir.sh beinan.sh 
+[beinan@beinnaIBM:~] chmod 755 /etc/cron.daily.rsync/*.sh 
+[beinan@beinnaIBM:~] mkdir /etc/rsyncd/
+[beinan@beinnaIBM:~] touch /etc/rsyncd/rsynclinuxsir.password
+[beinan@beinnaIBM:~] touch /etc/rsyncd/rsyncbeinan.password
+[beinan@beinnaIBM:~] chmod 600 /etc/rsyncd/rsyncbeinan.*
+注： 我们在 /etc/cron.daily/ 中创建了两个文件beinan.sh和linuxsir.sh ，并且是权限是 755的。创建了两个密码文件，linuxsir用户用的是 rsynclinuxsir.password ，而beinan用户用的是 rsyncbeinan.password ，权限是600；
+我们编辑linuxsir.sh，内容是如下的：
+#!/bin/sh
+#linuxsir.org home backup 
+/usr/bin/rsync   -avzP --password-file=/etc/rsyncd/rsynclinuxsir.password   linuxsir@192.168.1.171::linuxsirhome   /home/linuxsirhome/$(date +'%m-%d-%y')
+我们编辑 beinan.sh ，内容是：
+#!/bin/sh
+#linuxsir.org beinan home backup 
+/usr/bin/rsync   -avzP --password-file=/etc/rsyncd/rsyncbeinan.password   linuxsir@192.168.1.171::beinan   /home/beinanhome/$(date +'%m-%d-%y')
+注：你可以把linuxsir.sh 和beinan.sh 的内容合并到一个文件中，比如都写到 linuxsir.sh 中；
+接着我们修改 /etc/rsyncd/rsynclinuxsir.password 和 rsyncbeinan.password的内容；
+[beinan@beinnaIBM:~] echo "222222" > /etc/rsyncd/rsynclinuxsir.password
+[beinan@beinnaIBM:~] echo "333333"> /etc/rsyncd/rsyncbeinan.password
+然后我们再/home目录下创建linuxsirhome 和beinanhome两个目录，意思是服务器端的linuxsirhome数据同步到备份服务器上的/home/linuxsirhome下，beinan数据同步到 /home/beinanhome/目录下。并按年月日归档创建目录；每天备份都存档；
+[beinan@beinnaIBM:~] mkdir /home/linuxsirhome
+[beinan@beinnaIBM:~] mkdir /home/beinanhome
+第二步：修改crond服务器的配置文件
+[beinan@beinnaIBM:~] crontab -e
+加入下面的内容：
+# Run daily cron jobs at 4:10 every day backup linuxsir data: 
+10 4 * * * /usr/bin/run-parts   /etc/cron.daily.rsync    1> /dev/null
+注：
+第一行是注释，是说明内容，这样能自己记住。
+第二行表示在每天早上4点10分的时候，运行 /etc/cron.daily.rsync 下的可执行脚本任务；
+第三步：重启crond服务器；
+配置好后，要重启crond 服务器；
+[beinan@beinnaIBM:~]# killall crond    注：杀死crond 服务器的进程；
+[beinan@beinnaIBM:~]# ps aux |grep crond 注：查看一下是否被杀死；
+[beinan@beinnaIBM:~]# /usr/sbin/crond    注：启动 crond 服务器；
+[beinan@beinnaIBM:~]# ps aux |grep crond 注：查看一下是否启动了？
+root      3815 0.0 0.0   1860   664 ?        S    14:44   0:00 /usr/sbin/crond
+root      3819 0.0 0.0   2188   808 pts/1    S+   14:45   0:00 grep crond
+
+
+
+http://www.osyunwei.com/archives/7435.html

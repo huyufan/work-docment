@@ -1,0 +1,33 @@
+一、安装VLD扩展（linux）  opcode
+1、下载
+地址：http://pecl.php.net/package/vld
+2、解压安装
+[php] view plain copy
+# tar zxvf vld-0.11.1.tgz  
+# cd ./vld-0.11.1  
+# /usr/local/php/bin/phpize                
+# ./configure --with-php-config=/usr/local/php/bin/php-config --enable-vld  
+# make && make install  
+
+
+
+
+php.ini  extension=vld.so
+
+
+php -dvld.active=1 test.php
+
+
+
+VLD扩展的参数列表：
+
+-dvld.active 是否在执行PHP时激活VLD挂钩，默认为0，表示禁用。可以使用-dvld.active=1启用。
+-dvld.skip_prepend 是否跳过php.ini配置文件中auto_prepend_file指定的文件， 默认为0，即不跳过包含的文件，显示这些包含的文件中的代码所生成的中间代码。此参数生效有一个前提条件：-dvld.execute=0
+-dvld.skip_append 是否跳过php.ini配置文件中auto_append_file指定的文件， 默认为0，即不跳过包含的文件，显示这些包含的文件中的代码所生成的中间代码。此参数生效有一个前提条件：-dvld.execute=0
+-dvld.execute 是否执行这段PHP脚本，默认值为1，表示执行。可以使用-dvld.execute=0，表示只显示中间代码，不执行生成的中间代码。
+-dvld.format 是否以自定义的格式显示，默认为0，表示否。可以使用-dvld.format=1，表示以自己定义的格式显示。这里自定义的格式输出是以-dvld.col_sep指定的参数间隔
+-dvld.col_sep 在-dvld.format参数启用时此函数才会有效，默认为 “\t”。
+-dvld.verbosity 是否显示更详细的信息，默认为1，其值可以为0,1,2,3 其实比0小的也可以，只是效果和0一样，比如0.1之类，但是负数除外，负数和效果和3的效果一样 比3大的值也是可以的，只是效果和3一样。
+-dvld.save_dir 指定文件输出的路径，默认路径为/tmp。
+-dvld.save_paths 控制是否输出文件，默认为0，表示不输出文件
+-dvld.dump_paths 控制输出的内容，现在只有0和1两种情况，默认为1,输出内容

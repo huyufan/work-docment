@@ -1,0 +1,5 @@
+[mysql]
+137 prompt="\u@\h \R:\m:\s [\d]> "
+138 auto-rehash
+
+old_passwords=0

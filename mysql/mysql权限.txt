@@ -1,0 +1,21 @@
+mysql>grant all privileges on testDB.* to test@localhost identified by '1234';
+ 　　mysql>flush privileges;//刷新系统权限表
+　　格式：grant 权限 on 数据库.* to 用户名@登录主机 identified by "密码";　
+如果想指定部分权限给一用户，可以这样来写:
+　　mysql>grant select,update on testDB.* to test@localhost identified by '1234';
+　　mysql>flush privileges; //刷新系统权限表
+授权test用户拥有所有数据库的某些权限： 　 
+　　mysql>grant select,delete,update,create,drop on *.* to test@"%" identified by "1234";
+
+
+show grants for 'root'@'%'; 查看用户权限;
+
+with grant option;如果想让授权的用户，也可以将这些权限 grant 给其他用户，需要选项 “grant option“
+
+drop user hyf@'%'; 删除账户及权限
+查看当前使用的数据库 status   show tables  ;select database();
+desc 表 和 show columns from 表  查看表的信息
+
+CREATE USER 'hyf'@'%' IDENTIFIED BY '123456'; 创建用户  
+
+

@@ -1,0 +1,17 @@
+另外，一般的内存页大小为4kB，可以通过命令：getconf PAGE_SIZE 来查看，一般是4096Byte
+
+huge page的相关信息：cat /proc/meminfo | grep Huge
+HugePages_Total:    1024
+HugePages_Free:     1024
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+
+HugePages_Total: Hugepage的页面数量
+  HugePages_Free: 剩余的页面数量
+  HugePages_Rsvd: 被分配预留但是还没有使用的page数目
+ HugePages_Surp：HugePages_Total减去/proc/sys/vm/nr_hugepages中的值（我对这个理解也不很清楚）。
+  Hugepagesize: 每单位数量大小
+
+
+http://www.laruence.com/2015/10/02/3069.html

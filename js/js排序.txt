@@ -1,0 +1,13 @@
+function listSortBy(arr, field, order){ 
+    var refer = [], result=[], order = order=='asc'?'asc':'desc', index; 
+    for(i=0; i<arr.length; i++){ 
+        refer[i] = arr[i][field]+':'+i; 
+    } 
+    refer.sort(); 
+    if(order=='desc') refer.reverse(); 
+    for(i=0;i<refer.length;i++){ 
+        index = refer[i].split(':')[1]; 
+        result[i] = arr[index]; 
+    } 
+    return result; 
+}

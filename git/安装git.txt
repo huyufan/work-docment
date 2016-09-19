@@ -1,0 +1,43 @@
+
+a、usr/local/git/share/locale'
+Can't locate ExtUtils/MakeMaker.pm in @INC (@INC contains: /usr/local/lib/perl5 /usr/local/share/perl5 /usr/lib/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib/perl5 /usr/share/perl5 .) at Makefile.PL line 3.
+BEGIN failed--compilation aborted at Makefile.PL line 3.
+yum install perl-ExtUtils-CBuilder perl-ExtUtils-MakeMaker
+
+
+
+b、tclsh failed; using unoptimized loading
+MSGFMT    po/de.msg make[1]: *** [po/de.msg] Error 127
+
+yum install tcl
+
+c、/bin/sh: msgfmt: command not found
+make: *** [po/build/locale/da/LC_MESSAGES/git.mo] Error 127
+
+ 
+
+解决：yum install gettext-devel
+
+
+d、git clone时候提示fatal: Unable to find remote helper for 'https'
+
+ 
+
+解决：yum install libcurl-devel   安装完成后，版本确认。
+
+ 
+
+http://git-scm.com/download
+
+
+初始化一个Git仓库，使用git init命令。
+
+添加文件到Git仓库，分两步：
+
+第一步，使用命令git add <file>，注意，可反复多次使用，添加多个文件；
+
+第二步，使用命令git commit，完成。
+
+git config --global user.name 
+
+git config --global user.email

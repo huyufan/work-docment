@@ -1,0 +1,30 @@
+touch /dev/shm/php-fpm.socket
+
+vim php-fpm.conf     listen  =/dev/shm/php-fpm.socket
+
+chown -R www:www /dev/shm/php-fpm.socket
+
+chmod 777 /dev/shm/php-fpm.socket
+
+
+nginx fastcgi_pass unix:/dev/shm/php-fpm.socket
+
+pid
+
+log_errors=on  开启错误日志
+
+error_log=     目录
+
+php 的脚步目录  php/sapi/fpm/init.d.php-fpm 
+
+
+php  重启   kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid`
+
+kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
+INT, TERM 立刻终止
+QUIT 平滑终止
+USR1 重新打开日志文件
+USR2 平滑重载所有worker进程并重新载入配置和二进制模块
+
+
+catch_workers_output  c输出错误

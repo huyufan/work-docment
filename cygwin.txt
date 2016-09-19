@@ -1,0 +1,12 @@
+
+Cygwin能做什么？
+
+Windows的Dos Scripts功能非常薄弱，命令行工具也非常少；如果您对Linux比较熟悉，那么Cygwin可以帮助您在Windows下面使用强大的Bash，以及使用数量繁多的Linux命令，通过Scripts，可以更加高效的完成系统管理工作 [站长维护的Windows服务器上都安装有Cygwin，所有的系统维护，数据备份，SCP自动同步，都是在Cygwin下面处理的。]
+如果您刚进入Linux的世界，使用Cygwin可以让你在Windows下面练习Linux的Bash，以及常用工具。而不需要安装Linux，也不用担心Windows被破坏。
+怎么安装和使用Cygwin?
+
+Cygwin所有的软件包都在互联网上，您需要先下载一个安装程序，根据安装程序的提示，从互联网上下载您需要的软件包。
+请点击导航栏的“安装”，查看整个安装过程。
+Cygwin.cn是?
+
+Cygwin在国外使用很广泛，Cygwin.cn旨在推广Cygwin在中国的普及和发展；

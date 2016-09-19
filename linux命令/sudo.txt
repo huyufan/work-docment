@@ -1,0 +1,7 @@
+sudo命令 “sudo”(super user do)
+命令允许授权用户执行超级用户或者其它用户的命令。通过在sudoers列表的安全策略来指定。 
+root@tecmint:~#
+ sudo add-apt-repository ppa:tualatrix/ppa 
+注意：sudo 允许用户借用超级用户的权限，
+然而"su"命令实际上是允许用户以超级用户登录。所以sudo比su更安全。 
+并不建议使用sudo或者su来处理日常用途，因为它可能导致严重的错误如果你意外的做错了事，

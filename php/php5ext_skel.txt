@@ -1,0 +1,4 @@
+http://blog.csdn.net/21aspnet/article/details/7345650
+
+cd php5.6/ext/ext_skel --extname=tel
+

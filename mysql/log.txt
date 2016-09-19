@@ -1,0 +1,15 @@
+long_query_time=1
+log_queries_not_using_indexes
+slow_query_log=ON
+log_slow_queries=ON
+ 51 slow_query_log_file=/usr/local/mysql/var/log_slow.log
+ 52 # Replication Master Server (default)
+ 53 # binary logging is required for replication
+ 54 log-bin=mysql-bin
+ 55 # binary logging format - mixed recommended
+ 56 binlog_format=mixed
+ 57 
+ 58 # required unique id between 1 and 2^32 - 1
+ 59 # defaults to 1 if master-host is not set
+ 60 # but will not function as a master if omitted
+ 61 server-id       = 1

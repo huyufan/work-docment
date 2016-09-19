@@ -1,0 +1,1 @@
+top -ab -n 1 | grep php-fpm | awk '{ed +=$6;}END{print ed;}'

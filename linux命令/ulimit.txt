@@ -1,0 +1,47 @@
+ulimit -a
+
+ulimit -c unlimited
+
+1. 修改文件/etc/security/limits.conf，添加
+
+<user>    soft    nofile    3000  
+<user>    hard   nofile    4096  
+
+
+soft指的是当前用户最多能打开的文件数，
+hard指的是当前用户最多能打开文件数的上限（
+比如当系统重启后，用户可以直接ulimit -n number，当number不大于hard number时，设置成功；但当number大于hard number时，会出现-bash: ulimit: open files: cannot modify limit: Operation not permitted错误。但是，当用户第二次输入ulimit -n number时，number只能降，不能升，否则也会出现相同的错误-bash: ulimit: open files: cannot modify limit: Operation not permitted）。
+
+
+
+
+在Linux的系统中对于进程(Process)会有一些限制，这就所谓的limit，在实际应用中最常见的就是对打开文件(Open Files)的限制，在配置web 服务如nginx时就会用到。在linux中这些限制是分为软限制(soft limit)和硬限制(hard limit)的。他们的区别就是软限制可以在程序的进程中自行改变(突破限制)，而硬限制则不行(除非程序进程有root权限)
+
+
+使用ulimit 命令可以分别查看软限制和硬限制，方法实在查看的参数前加 S 或 H。例如，查看打开文件数限制
+
+ulimit -Sn 查看的是软限制
+
+ulimit -Hn 查看的是硬限制
+
+Note: 对于打开文件数，如果有必要，还需要修改下面的文件
+
+sudo vim /etc/sysctl.conf
+修改下面的参数
+
+fs.file-max = 70000  // 这个数值应大于hard limit
+
+
+
+
+全局限制
+
+执行 cat /proc/sys/fs/file-nr 输出 9344 0 592026，分别为：1.已经分配的文件句柄数，2.已经分配但没有使用的文件句柄数，3.最大文件句柄数。但在kernel 2.6版本中第二项的值总为0，这并不是一个错误，它实际上意味着已经分配的文件描述符无一浪费的都已经被使用了 。
+
+我们可以把这个数值改大些，用 root 权限修改 /etc/sysctl.conf 文件:
+
+fs.file-max = 1000000
+
+net.ipv4.ip_conntrack_max = 1000000
+
+net.ipv4.netfilter.ip_conntrack_max = 1000000

@@ -1,0 +1,10 @@
+history命令 “history”命令就是历史记录。它显示了在终端中所执行过的所有命令的历史。 
+root@tecmint:~# history sudo add-apt-repository ppa:tualatrix/ppa 
+sudo apt-get update 
+sudo apt-get install ubuntu-tweak 
+sudo add-apt-repository ppa:diesch/testing sudo apt-get update sudo apt-get install indicator-privacy 
+sudo add-apt-repository ppa:atareao/atareao sudo apt-get update sudo apt-get install my-weather-indicator pwd cd && 
+sudo cp -r unity/6 /usr/share/unity/ cd /usr/share/unity/icons/ cd /usr/share/unity 
+
+注意：按住“CTRL + R”就可以搜索已经执行过的命令，它可以在你写命令时自动补全。 
+(reverse-i-search)`if': ifconfig

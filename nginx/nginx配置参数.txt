@@ -1,0 +1,6 @@
+/proc/sys/net/ipv4/tcp_max_syn_backlog
+
+net.core.somaxconn
+
+ulimit -n  是和那么这个有关
+cat /etc/security/limits.d/90-nproc.conf 

@@ -1,0 +1,31 @@
+max_connect_errors
+MySql Host is blocked because of many connection errors; unblock with 'mysqladmin flush-hosts' 解决方法
+环境：linux，mysql5.5.21
+
+错误：Host is blocked because of many connection errors; unblock with 'mysqladmin flush-hosts'
+
+原因：
+
+　　同一个ip在短时间内产生太多（超过mysql数据库max_connection_errors的最大值）中断的数据库连接而导致的阻塞；
+
+解决方法：
+
+1、提高允许的max_connection_errors数量（治标不治本）：
+
+　　① 进入Mysql数据库查看max_connect_errors： show variables like '%max_connect_errors%';
+
+　   ② 修改max_connect_errors的数量为1000： set global max_connect_errors = 1000;
+
+　　③ 查看是否修改成功：show variables like '%max_connection_errors%';
+
+2、使用mysqladmin flush-hosts 命令清理一下hosts文件（不知道mysqladmin在哪个目录下可以使用命令查找：whereis mysqladmin）；
+
+　　① 在查找到的目录下使用命令修改：/usr/bin/mysqladmin flush-hosts -h192.168.1.1 -P3308 -uroot -prootpwd;
+
+　　备注：
+
+　　　　其中端口号，用户名，密码都可以根据需要来添加和修改；
+
+　　　　配置有master/slave主从数据库的要把主库和从库都修改一遍的（我就吃了这个亏明明很容易的几条命令结果折腾了大半天）；
+
+　　　　第二步也可以在数据库中进行，命令如下：flush hosts;

@@ -1,0 +1,28 @@
+安装tcl tool  command language  http://blog.sina.com.cn/s/blog_716844910100qs6x.html
+yum install tcl
+
+http://www.cnblogs.com/wenanry/archive/2012/02/26/2368398.html
+
+make make test make PREFIX=/usr/local/redis
+
+
+redis-server /etc/redis.conf 
+
+
+/root/redis-3.2.0/utils/install_server.sh  安装服务  
+
+
+/root/redis-3.2.0/utils/redis_init_script   
+
+
+/redis-cli  -p 6379  shutdown
+
+info   
+
+
+auth
+
+
+ 
+
+ 

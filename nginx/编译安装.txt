@@ -1,0 +1,40 @@
+http://www.thinkphp.cn/code/992.html  (nginx php mysql)
+
+http://www.phpchina.com/portal.php?mod=view&aid=39848 (nginx php)
+
+https://idoseek.com/1666
+
+http://www.jb51.net/article/49479.htm
+
+ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.38.tar.gz
+
+http://zlib.net/zlib-1.2.8.tar.gz
+
+pcre: 用来作地址重写的功能。
+
+zlib：nginx 的gzip模块,传输数据打包，省流量（但消耗资源）。
+
+openssl：提供ssl加密协议
+
+
+./configure --prefix=/usr/local/nginx --user=www --group=www --with-http_ssl_module --with-http_gzip_static_module --with-http_stub_status_module  --with-pcre=/root/pcre --with-http_gunzip_module
+
+
+
+
+
+groupadd -r nginx
+useradd -r -g nginx -s /bin/false -M nginx
+
+#注意 \ 前面至少一个有空格
+./configure --sbin-path=/usr/local/nginx/nginx \
+--conf-path=/usr/local/nginx/nginx.conf \
+--pid-path=/usr/local/nginx/nginx.pid \
+--with-http_ssl_module \
+--with-pcre=../pcre-8.21 \  #指向解压的源码目录
+--with-zlib=../zlib-1.2.8 \    #指向解压的源码目录
+--with-openssl=../openssl-1.0.1 \ #指向解压的源码目录
+--with-http_stub_status_module \#启用 nginx 的 NginxStatus 功能，用来监控 Nginx 的当前状态
+--user=nginx \
+--group=nginx
+复制代码

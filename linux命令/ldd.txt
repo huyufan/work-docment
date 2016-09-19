@@ -1,0 +1,2 @@
+ldd $(which /usr/local/git/bin/git)
+简单说,/lib是内核级的,/usr/lib是系统级的,/usr/local/lib是用户级的.

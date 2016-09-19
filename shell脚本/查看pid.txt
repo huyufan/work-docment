@@ -1,0 +1,11 @@
+ #!/bin/bash
+  2 pid=`ps -ef | grep 'dc.php' | grep -v "grep" | awk '{print $2}'`
+  3 pid=0;
+  4 if [ "$pid" ]; then
+  5 echo $pid
+  6 else
+  7 php -f /www/path/dc.php > /tmp/dcerror.log  2>&1 &
+  8 echo "restart"
+  9 echo $(date +%Y-%m-%d_%H:%M:%S) > /tmp/dc.log
+ 10 fi
+~         

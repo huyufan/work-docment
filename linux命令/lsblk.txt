@@ -1,0 +1,4 @@
+http://www.imooc.com/article/2817
+
+
+lsblk  lsblk -l

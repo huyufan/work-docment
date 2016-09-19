@@ -1,0 +1,4 @@
+　　③、PHP利用Memcached实现session共享，程序无需作任何修改：
+　　修改php.ini（需要memcache.so扩展）
+session.save_handler = memcache
+session.save_path = tcp://192.168.1.2:11211

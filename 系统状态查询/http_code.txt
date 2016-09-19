@@ -1,0 +1,1 @@
+ curl -m 5 -s -w %{http_code} http://192.168.1.15/nginx_status -o /dev/null

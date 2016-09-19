@@ -1,0 +1,27 @@
+curl -sS https://getcomposer.org/installer | php
+
+-s 显示错误   -S  禁音模块 不输出
+php -r "readfile('https://getcomposer.org/installer');" | php
+
+
+你可以通过 --install-dir 选项指定 Composer 的安装目录（它可以是一个绝对或相对路径）：
+
+curl -sS https://getcomposer.org/installer | php -- --install-dir=bin
+
+
+
+
+php composer.phar install
+
+
+
+你可以执行这些命令让 composer 在你的系统中进行全局调用：
+
+curl -sS https://getcomposer.org/installer | php
+mv composer.phar /usr/local/bin/composer
+
+
+composer install
+
+php composer.phar update  更新
+  

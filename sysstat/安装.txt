@@ -1,0 +1,5 @@
+yum install sysstat
+
+
+
+vim /etc/cron.d/sysstat

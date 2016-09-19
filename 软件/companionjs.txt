@@ -1,0 +1,22 @@
+http://www.laruence.com/2008/07/11/108.html
+
+
+
+官网地址：http://www.my-debugbar.com/wiki/CompanionJS/HomePage  
+具体使用方法为：
+
+1、先下载Companion.JS安装文件，然后安装。
+
+ 2、下载安装Microsoft Script Debugger，如果您的机器已经安装过了就可以免过这一步。
+
+3、打开IE菜单“工具”–“Internet选项”–“高级”，找到“禁用脚本调试(Internet Explorer)”和“禁用脚本调试(在Internet Explorer之外)”，将两个选项前面的对钩都去掉，然后重启IE。
+
+4、在Ie中输入：http://www.my-debugbar.com/wiki/uploads/CompanionJS/dummy.htm，
+
+然后点击click me链接，如果左上角弹出一个小错误提示或下面控制台出现了错误信息提示，就说明您已经安装成功了。
+
+ 提示：Microsoft Script Debugger下载可到MS官网(需要经过MS的操作系统正版验证)：http://www.microsoft.com/downloads/details.aspx?displaylang=zh-cn&FamilyID=E606E71F-BA7F-471E-A57D-F2216D81EC3D#filelist或到baidu里输入“Microsoft Script Debugger 下载”寻找一下。
+
+
+
+

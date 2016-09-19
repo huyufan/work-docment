@@ -1,0 +1,7 @@
+2. core 文件
+    * 开启或关闭core文件的生成
+ulimit -c 可以查看是否打开此选项，若为0则为关闭；
+ulimit -c 0可手动关闭
+ulimit -c 1000 为设置core文件大小最大为1000k
+
+ulimit -c unlimited 设置core文件大小为不限制大小

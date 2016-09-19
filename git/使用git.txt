@@ -1,0 +1,60 @@
+安装仓库  git init  或者 git  init --bare 
+
+chown -R git:git sample.git
+
+git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell
+
+
+客户端  git clone git@server:/srv/sample.git
+
+
+git log  和  git reflog
+
+
+
+git reset --hard 最新 (自己的记录)
+
+
+git  push origin master
+
+
+git remote add origin djdjlslsdjjdjs  
+
+
+git branch
+
+git  checkout
+
+.git/config
+[receive]
+ denyCurrentBranch=ignore
+
+
+git pull
+
+
+用户   用 git-shell 登录  /usr/local/git/bin
+
+ git push -u origin master -f   强制提交
+
+
+git push -u origin master  //远程库是空  我们第一次推送master分支时，加上了-u参数
+
+
+git fetch origin master
+git log -p master..origin/master
+git merge origin/master
+
+
+
+git remote add origin git@github.com:michaelliao/learngit.git   添加远程仓库
+
+
+
+方法: git commit --amend 或 git commit --amend -m "Fixes bug #42"
+
+原理: git commit --amend 会用一个新的 commit 更新并替换最近的 commit ，这个新的 commit 会把任何修改内容和上一个 commit 的内容结合起来。如果当前没有提出任何修改，这个操作就只会把上次的 commit 消息重写一遍。
+
+
+
+rm test.php 删除    git checkout test.php  返回

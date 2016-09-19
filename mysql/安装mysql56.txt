@@ -1,0 +1,44 @@
+yum install gcc gcc-c++ ncurses-devel perl  bison
+yum -y install  gcc gcc-c++ gcc-g77 autoconf automake zlib* fiex* libxml* ncurses-devel libmcrypt* libtool-ltdl-devel* make cmake
+wget http://www.cmake.org/files/v2.8/cmake-2.8.10.2.tar.gz   
+
+http://downloads.mysql.com/archives/get/file/mysql-5.6.28.tar.gz
+tar -xzvf cmake-2.8.10.2.tar.gz   
+cd cmake-2.8.10.2   
+./bootstrap ; make ; make install  
+
+groupadd mysql
+
+useradd -M -g mysql -s /sbin/nologin mysql
+
+mysqladmin -u root password '123456' 
+
+cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DMYSQL_DATADIR=/data/mysql -DSYSCONFDIR=/etc -DWITH_MYISAM_STORAGE_ENGINE=1 -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_MEMORY_STORAGE_ENGINE=1 -DWITH_READLINE=1 -DMYSQL_UNIX_ADDR=/var/lib/mysql/mysql.sock -DMYSQL_TCP_PORT=19604  -DENABLED_LOCAL_INFILE=1 -DWITH_PARTITION_STORAGE_ENGINE=1  -DEXTRA_CHARSETS=all -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci
+-DENABLED_LOCAL_INFILE=1 
+ 
+ ./mysql_install_db --basedir=/usr/local/mysql --datadir=/data/mysql --user=mysql  在script
+  cp /usr/local/mysql/support-files/my-default.cnf /etc/my.cnf 
+openssh-clients
+chkconfig --add mysql
+chkconfig --level 2345 mysql on
+
+十二、修改MySQL用户root的密码
+ 
+
+mysqladmin -u root password '123456'   
+注：也可运行安全设置脚本，修改MySQL用户root的密码，同时可禁止root远程连接，移除test数据库和匿名用户。
+mysqladmin -u用户名 -p旧密码 password 新密码
+/usr/local/mysql/bin/mysql_secure_installation  
+
+
+yum remove mysql mysql-server mysql-libs compat-mysql51
+
+rm -rf /var/lib/mysql
+rm /etc/my.cnf
+
+
+
+查看是否还有mysql软件：
+rpm -qa|grep mysql
+
+

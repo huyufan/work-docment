@@ -1,0 +1,10 @@
+http://www.jb51.net/article/24101.htm   closure
+
+for(var i=1;i&lt;=5;i++){
+    setTimeout(function(){
+        console.log(i);
+    }, i*1000);
+}
+
+
+闭包有个重要的作用就是，在内层函数引用外层函数定义的变量时，外层函数的变量不会被会被持久化。

@@ -1,0 +1,29 @@
+在编译时要加上-g选项，生成的可执行文件才能用gdb进行源码级调试：
+
+$ gcc -g main.c -o main
+$ gdb main
+
+s  执行   n跳到方法里面
+
+info b，单步调试输入n，查看运行的变量：p  变量名如 p i，退出调试
+
+backtrace 
+
+gdb --pid=122323
+
+debuginfo-install glibc-2.12-1.132.el6.x86_64
+问题描述：
+centos中GDB调试出现如下错误：Missing separate debuginfos, use: debuginfo-install glibc-2.12-1.132.el6.x86_64
+
+1
+修改/etc/yum.repos.d/CentOS-Debuginfo.repo里面的debuginfo目录中enable=1
+2
+命令：yum install nss-softokn-debuginfo --nogpgcheck
+如果直接执行debuginfo-install命令的话会出现nss-softokn-debuginfoXXXXXXX not signed ,就是没有签名，不能安装，所以采用--nogpgcheck选项 忽略签名的检查
+3
+命令：debuginfo-install glibc-2.12-1.80.e16_3.5.i686
+
+其他linux系统可参照以上步骤解决，如果是64位系统 需要修改最后一步：debuginfo-install glibc-2.12-1.132.el6.x86_64
+
+如果没有debuginfo-install命令的话：
+yum install  yum-utils

@@ -1,0 +1,83 @@
+sar -q -f sa12  进程
+
+runq-sz
+
+等待执行的任务队列长度,越长阻塞越严重
+
+
+plist-sz  队列中的任务总数
+
+
+ldavg-1 ldavg-5  1davg-15  负载
+
+
+
+
+sar -p -f sa12  cpu
+
+PRI 进程优先权,代表这个进程可被执行的优先级,其值越小,优先级越高,越早被执行
+
+NI  进程的nice值  进程可被执行的优先级的修正数值
+
+
+PRI(new) =PRI(old)+ nice
+
+
+iowait 等待io执行的百分比  越高 代表io执行越高
+
+
+steal  等待cpu的百分比  
+
+
+
+sar -r -f sa12  内存
+
+buffer/cached 是为了提高文件读取的性能的磁盘缓存
+
+page cache 针对文件系统的,是文件的缓存
+
+buffer cache 针对磁盘块的缓存
+
+memuserd + commit  不能大于100%
+
+
+sar -B -f sa12 换页
+pgpgin/s
+
+表示每秒从磁盘或swap置换到内存字节数(KB)
+pgpgout/s
+
+表示每秒从内存置换到磁盘或者swap字节数
+
+fault/s
+每秒钟系统产生的残页数
+majflt/s
+
+每秒钟产生的主残页数(只要有就会出现换页)
+
+
+sar -W -f  sa12
+
+
+
+sar  -b  -f  sa12  io
+
+tps 每秒钟物理设备的I/O请求次数
+
+rtps 每秒钟从物理设备读入的请求次数
+
+wtps 每秒钟向物理设备写入的请求次数
+
+bread/s 每秒钟从物理设备读入的数据量
+
+bwrtn/s 每秒钟向物理设备写入的数据量
+
+
+sar -d  -f  sa12
+util I/O 请求占CPU的百分比 比率越大 说明越饱和
+
+
+sar -n DEV -f  sa12
+
+
+sar -n NFS -f sa12

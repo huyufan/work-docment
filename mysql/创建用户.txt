@@ -1,0 +1,4 @@
+CREATE USER 'hyf'@'%' IDENTIFIED BY '123456'; 创建用户  
+
+set PASSWORD for dd@'%' = PASSWORD("222222");  修改密码
+ 

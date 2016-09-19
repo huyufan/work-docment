@@ -1,0 +1,92 @@
+http://www.infoq.com/cn/articles/nignx-log-goldmine
+1.根据访问IP统计UV
+ awk '{print $1}' access.log | sort | uniq -u
+
+2.统计访问URL统计PV
+awk '{print $7}' access.log |wc -l
+
+3.查询访问最频繁的URL
+awk '{print $7}' access.log|sort | uniq -c | sort -n -r -k 1 | more
+
+
+4.查询访问最频繁的IP
+
+awk '{print $1}' access.log|sort | uniq -c |sort -n -k 1 -r|more
+
+5.查看当天的
+
+cat access.log | grep '06/May/2016' | awk -F ' ' '{print $1}' | sort | uniq -c | sort -n -r -k 1
+
+6:请求总数   
+
+less main.log | wc -l
+
+7:平均每秒的请求数
+
+less main.log | awk '{sec=substr($4,2,20);reqs++;reqsBySec[sec]++;} END{print reqs/length(reqsBySec)}'
+
+8:峰值每秒请求数
+
+less main.log | awk '{sec=substr($4,2,20);requests[sec]++;} END{for(s in requests){printf("%s %s\n", requests[s],s)}}' | sort -nr | head -n 3
+
+9:对一般网站来说，带宽是最珍贵的资源，可能一不小心，某些资源如文件、图片就占用了大量的带宽，执行命令检查一下：
+less careworker_V3.log | awk '{url=$7; requests[url]++;byte[url] += $10 } END {for(url in requests){printf("%sMB %sKB/req %s,%s\n",byte[url]/1024/1024,byte[url]/requests[url]/1024,requests[url],url)}}'| sort -n -r -k 1 | head -n 10
+
+
+$body_bytes_sent 发送给客户端的字节数，不包括响应头的大小； 该变量与Apache模块mod_log_config里的“%B”参数兼容。
+$bytes_sent 发送给客户端的总字节数。
+
+
+
+less main.log | awk '{print $7}' |sed -re 's/(.*)\?.*/\1/g' -e 
+'s/(.*)\..*/\1/g' -e 's:/[0-9]+:/*:g' | awk '{requests[$1]++;time[$1]
++=$2} END{for(url in requests){printf("%smin %ss/req %s %s\n", time
+[url] / 60, time[url] /requests[url], requests[url], url)}}' | sort -nr | head -n 50
+
+
+less main.log | awk '{url=$7; times[url]++} END{for(url in 
+times){printf("%s %s\n", times[url], url)}}' | sort -nr | more`
+
+$request_time 请求处理时间，单位为秒，精度毫秒； 从读入客户端的第一个字节开始，直到把最后一个字符发送给客户端后进行日志写入为止。
+
+upstream_response_time
+
+是指从Nginx向后端（php-cgi)建立连接开始到接受完数据然后关闭连接为止的时间。
+
+从上面的描述可以看出，$request_time肯定比$upstream_response_time值大，特别是使用POST方式传递参数时，因为Nginx会把request body缓存住，接受完毕后才会把数据一起发给后端。所以如果用户网络较差，或者传递数据较大时，$request_time会比$upstream_response_time大很多。
+
+所以如果使用nginx的accesslog查看php程序中哪些接口比较慢的话，记得在log_format中加入$upstream_response_time。
+
+
+第一步：是不是用户的网络状况不好？根据既往的经验，如果只有少量的请求较慢，而前后其他IP的请求都较快，通常是用户手机或网络状况不佳引起的。最简单的方法，统计慢查询所占比例：
+
+less main.log | awk -v limit=2 '{min=substr($4,2,17);reqs[min]
+++;if($11>limit){slowReqs[min]++}} END{for(m in slowReqs){printf("%s
+ %s %s%s %s\n", m, slowReqs[m]/reqs[m] * 100, "%", slowReqs[m], reqs
+[m])}}' | more
+    10/Apr/2016:12:51 0.367% 7 1905
+    10/Apr/2016:12:52 0.638% 12 1882
+    10/Apr/2016:12:53 0.548% 14 2554
+
+
+我们遇到过类似问题，平均响应时间90ms，还算正常，但某台服务器明显变慢，平均响应时间达到了200ms，影响了部分用户的访问体验。
+
+less main.log | awk '{upServer=$13;upTime=$12;if(upServer == 
+"-"){upServer="Nginx"};if(upTime == "-"){upTime=0};upTimes[upServer]
++=upTime;count[upServer]++;totalCount++;} END{for(server in upTimes)
+{printf("%s %s%s %ss %s\n", count[server], count[server]/totalCount * 
+100, "%", upTimes[server]/count[server], server)}}' | sort -nr
+
+第三步：应用系统没有瓶颈，是带宽的问题？快速查看一下每秒的流量：
+
+less main.log | awk '{second=substr($4,2,20);bytes[second]+=$10;}
+ END{for(s in bytes){printf("%sKB %s\n", bytes[s]/1024, s)}}' | more`
+    1949.95KB 10/Apr/2016:12:53:15
+    2819.1KB 10/Apr/2016:12:53:16
+    3463.64KB 10/Apr/2016:12:53:17
+    3419.21KB 10/Apr/2016:12:53:18
+    2851.37KB 10/Apr/2016:12:53:19
+
+
+
+

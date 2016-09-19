@@ -1,0 +1,10 @@
+wget -c http://pecl.php.net/get/memcached-2.2.0.tgz
+
+wget -c https://launchpad.net/libmemcached/1.0/1.0.18/+download/libmemcached-1.0.18.tar.gz
+
+extension  基于php引擎扩展  不需要全路径
+
+zend_extension  基于zend引擎扩展  需要全路径
+
+php是基于zend引擎的
+./configure --enable-memcached --with-php-config=/usr/local/php/bin/php-config --with-libmemcached-dir=/usr/local/libmemcached/ --disable-memcached-sasl

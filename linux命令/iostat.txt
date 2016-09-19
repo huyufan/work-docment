@@ -1,0 +1,4 @@
+yum install sysstat
+
+
+iostat：中央处理单元（CPU）的统计数据和设备、分区输入/输出统计信息。

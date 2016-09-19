@@ -1,0 +1,22 @@
+ssh-keygen  产生公钥与私钥对.
+ssh-copy-id 将本机的公钥复制到远程机器的authorized_keys文件中，ssh-copy-id也能让你有到远程机器的home, ~./ssh , 和 ~/.ssh/authorized_keys的权利
+
+ssh-keygen
+
+ssh-copy-id -i ~/.ssh/id_rsa.pub remote-host
+
+#其实默认id_rsa就已经加入私钥的路径了,这里只是示例而已
+IdentityFile ~/.ssh/id_rsa
+#如果有其他的私钥，还要再加入其他私钥的路径
+IdentityFile ~/.ssh/blue_rsa
+
+
+ssh-keygen -t rsa
+rsa是一种密码算法，还有一种是dsa，证书登录常用的是rsa。
+
+
+4：如果ssh的端口不是22，可用下面命令
+ssh-copy-id -i ~/.ssh/id_rsa.pub "-p 23 jifeng@jifeng03"
+
+删除ssh中旧的RSA key
+ssh-keygen -f "/root/.ssh/known_hosts"  -R 192.168.1.15

@@ -1,0 +1,6 @@
+yum  install subversion  客户端的
+
+svn list  路径
+
+
+svn  checkout   路径

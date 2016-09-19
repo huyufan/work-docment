@@ -1,0 +1,37 @@
+
+libmemcached  memcached  
+memcache的官方主页：http://pecl.php.net/package/memcache
+memcached的官方主页：http://pecl.php.net/package/memcached
+wget http://download.tangent.org/libmemcached-0.35.tar.gz
+3.附：php的memcached扩展的安装：php有两个memcached扩展，一个是memcache，一个是memcached
+1)安装libmemcached库
+tar zxvf libmemcached-0.50.tar.tar 
+cd libmemcached-0.50
+./configure --prefix=/usr/local/webserver/libmemcached --with-memcached
+make
+make install
+  
+2)安装php memcached扩展
+zxvf memcached-1.0.2.tgz 
+cd memcached-1.0.2
+/usr/local/webserver/php/bin/phpize 
+./configure --enable-memcached --with-php-config=/usr/local/webserver/php/bin/php-config --with-libmemcached-dir=/usr/local/webserver/libmemcached
+make
+make install
+
+
+
+
+ /usr/local/bin/memcached -d -m 200 -u root -l 192.168.1.91 -p 12301 -c 1000 -P /tmp/memcached.pid
+相关解释如下：
+-d选项是启动一个守护进程，
+-m是分配给Memcache使用的内存数量，单位是MB，这里是200MB
+-u是运行Memcache的用户，如果当前为 root 的话，需要使用此参数指定用户。
+-l是监听的服务器IP地址，如果有多个地址的话，我这里指定了服务器的IP地址192.168.1.91
+-p是设置Memcache监听的端口，我这里设置了12301，最好是1024以上的端口
+-c选项是最大运行的并发连接数，默认是1024，这里设置了256
+-P是设置保存Memcache的pid文件，我这里是保存在 /tmp/memcached.pid
+停止Memcache进程：
+# kill `cat /tmp/memcached.pid`
+也可以启动多个守护进程，但是端口不能重复
+复制代码

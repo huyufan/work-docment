@@ -1,0 +1,16 @@
+top -u www
+
+
+-h    
+
+f ,o   显示
+
+
+F,O  排序
+
+VIRT  虚拟内存大少
+RES  正式物理大小   
+SHR  共享物理大小
+
+
+top -ab -n  1

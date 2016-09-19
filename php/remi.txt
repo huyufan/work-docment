@@ -1,0 +1,3 @@
+yum ¨Cenablerepo=remi update php* mysql*
+°²×°memcached 
+yum ¨Cenablerepo=remi install memcached php-pecl-memcached

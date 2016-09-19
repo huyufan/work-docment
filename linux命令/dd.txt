@@ -1,0 +1,7 @@
+dd 是 Linux/UNIX 下的一个非常有用的命令，作用是用指定大小的块拷贝一个文件，并在拷贝的同时进行指定的转换。
+
+名称: dd 
+使用权限: 所有使用者dd 这个指令在 manual 里的定义是 convert and copy a file
+
+
+http://www.cnblogs.com/dkblog/archive/2009/09/18/1980715.html

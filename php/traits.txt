@@ -1,0 +1,27 @@
+Traits是一种轻量级的方法复用(相对继承来说).为什么这么说呢? 这就好比, 如果你提供一个基类供用户去继承使用, 那么不可避免的你就需要考虑如何能让用户继承后可用, 如何避免用户改写了某些关键属性, 覆盖了某些关键方法而造成出错. 这个时候你就要考虑改用public还是private, 或者protected, 你还要考虑, 那个方法应该申明为FINAL..
+
+
+
+<?php
+interface sadj{
+ public function sayHello();  
+}
+class Base{
+    public function sayHello(){
+        echo 'hello';
+    }
+}
+trait SysWorld{
+    public function sayHello(){
+        parent::sayHello();
+        echo 'world';
+    }
+}
+class MyHelloWorld extends Base{
+    use SysWorld;
+//    public function sayHello() {
+//     echo "del deo";
+// }
+}
+$o=new MyHelloWorld();
+$o->sayHello();

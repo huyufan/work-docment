@@ -1,0 +1,89 @@
+整体上来说，复制有3个步骤：   
+(1)    master将改变记录到二进制日志(binary log)中（这些记录叫做二进制日志事件，binary log events）；
+(2)    slave将master的binary log events拷贝到它的中继日志(relay log)；
+(3)    slave重做中继日志中的事件，将改变反映它自己的数据。
+
+binlog-db-db=test   binlog-ignore-db=mysql master
+
+
+log_bin=mysql-bin
+relay_log=mysql-relay-bin
+log_slave_updates=1
+read_only=1
+replicate-do-db=test
+replicate-ignore-db=mysql    slave
+grant replication slave on *.* to replication@'%';
+
+grant replication slave on *.* to '用户名'@'主机' identified by '密码';
+
+show master status;
+
+
+4、执行以下命令锁定数据库以防止写入数据。
+
+mysql>FLUSH TABLES WITH READ LOCK;
+5、退出mysql命令行，导出数据库
+
+#mysqldump -u root -p123456 --all-databases  --lock-tables=false  -- > /root/all.sql
+6、使用scp命令传输数据库文件all.sql到从服务器。
+
+#scp /root/all.sql root@www.example.com:/root
+7、再次连接数据库进入mysql命令行查看master状态。
+
+mysql>SHOW MASTER STATUS;
+请记下显示的信息，配置从服务器会用到。
++——————+———-+————–+——————+
+| File | Position | Binlog_Do_DB | Binlog_Ignore_DB |
++——————+———-+————–+——————+
+| mysql-bin.000003 | 1001741 | dbispconfig | mysql |
++——————+———-+————–+——————+
+1 row in set (0.00 sec)
+8、解锁数据表。
+
+mysql>UNLOCK TABLES;
+配置从服务器(slave)
+
+登录从服务器。
+1、导入主服务器的数据库。
+
+#mysql -u root -p123456 < /root/all.sql
+2、编辑配置文件my.cnf,在[mysqld]下面加入：
+
+server-id=2
+2可以自己定义，只要保证唯一的就行。
+3、保存文件并重启mysqld。
+
+#service mysqld restart
+
+
+、登录mysql服务器，执行以下命令。
+
+mysql>CHANGE MASTER TO
+MASTER_HOST='X.X.X.X',
+MASTER_USER='user',
+MASTER_PASSWORD='password',
+MASTER_PORT=3306,
+MASTER_LOG_FILE='mysql-bin.000001',
+MASTER_LOG_POS=98,
+MASTER_CONNECT_RETRY=10;
+MASTER_HOST:主服务器的IP。
+MASTER_USER：配置主服务器时建立的用户名
+MASTER_PASSWORD：用户密码
+MASTER_PORT：主服务器mysql端口，如果未曾修改，默认即可。
+
+start slave; stop slave;
+ change master to master_host='192.168.1.15', master_user='replication', master_password='123456', master_port=19604, master_log_file='mysql-bin.000005',master_log_pos=44550376
+
+
+FLUSH TABLES WITH READ LOCK
+
+mysqldump -u root -p123456 --all-databases  --lock-tables=false  -- > /root/all.sql  
+ 
+--skip-lock-tables 
+scp /root/all.sql root@www.example.com:/root
+
+SHOW MASTER STATUS;
+
+UNLOCK TABLES;
+
+truncate table 表   删除数据

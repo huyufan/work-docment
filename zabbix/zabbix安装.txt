@@ -1,0 +1,39 @@
+wget http://fossies.org/unix/misc/zabbix-2.0.3.tar.gz
+
+net-snmp-devel   curl  
+grant all privileges on zabbix.* to zabbix_user@'192.168.10.197' identified by '123456';
+
+
+服务器 配置
+
+./configure --prefix=/usr/local/zabbix --enable-server  --enable-proxy --with-mysql --with-net-snmp --with-libcurl
+
+一般在 /usr/local/lib  或者 编译安装安装目录下面
+
+
+ln -s  /usr/local/lib/*.so   /usr/lib64
+
+
+如果不行，往下看
+export LD_LIBRARY_PATH=”/usr/local/mysq/lib:$LD_LIBRARY_PATH”
+加上这句后在去安装编译就ok了。
+ 
+1.找到libmysqlclient.so.16所在的目录
+2.将该目录加入到/etc/ld.so.conf的第一行
+3.ldconfig
+
+cp -r /root/zabbix-3.0.3/frontends/php/ /www/html/zabbix  
+
+cp /root/zabbix-3.0.3/misc/init.d/fedora/core/zabbix_server /etc/init.d/
+
+chmod +x /etc/init.d/zabbix_server 
+chkconfig --add zabbix_server
+chkconfig --level 2345 zabbix_server on
+
+
+默认的用户是admin zabbix
+
+
+客户端 --enable-agent
+
+其中Server和ServerActive都指定zabbixserver的IP地址，不同的是，前者是被动后者是主动。也就是说Server这个配置是用来允许127.0.0.1这个ip来我这取数据。而serverActive的127.0.0.1的意思是，客户端主动提交数据给他。明白了吗？为什么要分主动和被动？后续再来讨论这个问题！ 

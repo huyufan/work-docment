@@ -1,0 +1,20 @@
+mysqlslap -a(自动创建sql语句) -i 总计执行多少次   -c  并发多少次  -u  -p
+
+--concurrency代表并发数量，多个可以用逗号隔开，当然你也可以用自己的分隔符隔开，这个时候要用到--delimiter开关。
+--engines代表要测试的引擎，可以有多个，用分隔符隔开。
+--iterations代表要运行这些测试多少次。
+--auto-generate-sql 代表用系统自己生成的SQL脚本来测试。
+--auto-generate-sql-load-type 代表要测试的是读还是写还是两者混合的（read,write,update,mixed）
+--number-of-queries 代表总共要运行多少次查询。每个客户运行的查询数量可以用查询总数/并发数来计算。比如倒数第二个结果2=200/100。
+--debug-info 代表要额外输出CPU以及内存的相关信息。
+--number-int-cols 代表示例表中的INTEGER类型的属性有几个。
+--number-char-cols 意思同上。
+--create-schema 代表自己定义的模式（在MySQL中也就是库）。
+--query 代表自己的SQL脚本。
+--only-print 如果只想打印看看SQL语句是什么，可以用这个选项。
+
+
+ -c 1000 -i 20 --query='select * from hg_order' --create-schema=careworker_v2_api --only_print  --debug_info --  -uroot -p123456
+
+
+./mysqlslap -c 1000 -i 20 --query='select * from hg_order' --create-schema=careworker_v2_api --engine=innodb  --debug_info   -uroot -p123456

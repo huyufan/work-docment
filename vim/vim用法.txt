@@ -1,0 +1,10 @@
+a   在光标后一位开始插入
+A   在该行的最后插入
+I   在该行的最前面插入
+
+set nu  set nonu
+
+:s/echo/vh   替换  echo  替换成vh
+:%s             全部替换
+
+more less   按空格翻页
