@@ -1,1 +1,2 @@
-http://www.php-internals.com/book/  ÉîÈëPHPÄÚºË
+
+http://www.php-internals.com/book/  æ·±å…¥PHPå†…æ ¸
