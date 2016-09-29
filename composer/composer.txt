@@ -8,6 +8,7 @@ php -r "readfile('https://getcomposer.org/installer');" | php
 
 curl -sS https://getcomposer.org/installer | php -- --install-dir=bin
 
+/usr/local/php/bin/composer.phar config -g disable-tls false   ¹Ø±Õssl
 
 
 

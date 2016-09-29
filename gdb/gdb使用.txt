@@ -27,3 +27,5 @@ centos中GDB调试出现如下错误：Missing separate debuginfos, use: debuginfo-install
 
 如果没有debuginfo-install命令的话：
 yum install  yum-utils
+
+gdb -p 进程

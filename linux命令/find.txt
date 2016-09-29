@@ -20,3 +20,19 @@ find /home -user hadoop -type d -ls
 
 7、查找权限为777的文件
 find / -perm -777 -type d -ls
+
+
+
+
+find /home -type f -mmin -10
+搜索home目录中所有过去10分钟中更新过的普通文件,如果不加-type f参数，则搜索普通文件+特殊文件+目录。
+
+三 whereis
+whereis命令只能用于程序名的搜索，而且只搜索二进制文件（参数-b）、man说明文件（参数-m）和源代码文件（参数-s），如果省略参数则返回所有信息
+实例：
+$ whereis grep
+
+四 which
+which命令是在PATH变量指定的路径中搜索某个系统命令的位置，并且返回第一个搜索结果。也就是说，使用which命令就可以看到某个系统命令是否存在以及执行的到底是哪一个位置的命令
+实例：
+$ which grep
