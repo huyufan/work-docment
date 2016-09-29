@@ -1,1 +1,2 @@
-find /etc -name ¡°*¡± | xargs grep ¡°hello abcserver¡±
+
+find /etc -name â€œ*â€ | xargs grep â€œhello abcserverâ€
