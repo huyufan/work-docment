@@ -1,0 +1,16 @@
+#tar zxvf http_load-12mar2006.tar.gz
+#cd http_load-12mar2006
+mkdir -p /usr/local/man
+#make && make install
+
+命令格式：http_load -p 并发访问进程数 -s 访问时间 需要访问的URL文件
+
+参数其实可以自由组合，参数之间的选择并没有什么限制。比如你写成http_load -parallel 5 -seconds
+
+300 urls.txt也是可以的。我们把参数给大家简单说明一下。
+-parallel 简写-p ：含义是并发的用户进程数。
+-fetches 简写-f ：含义是总计的访问次数
+-rate    简写-p ：含义是每秒的访问频率
+-seconds简写-s ：含义是总计的访问时间
+
+http://www.cnblogs.com/Robert-huge/p/5275919.html
