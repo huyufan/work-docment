@@ -1,0 +1,11 @@
+date -d "today" +"%Y%m%d" 今天时间
+
+
+date -d "yesterday" +"%Y%m%d" 昨天时间
+
+
+date +%Y%m%d --date="-1 day"  得到昨天时间
+
+date -d -${t}day '+%Y%m%d'
+ 
+
