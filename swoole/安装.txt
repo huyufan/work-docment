@@ -17,3 +17,7 @@ sudo make install
 extension=swoole.so
 
 php -m
+
+
+
+

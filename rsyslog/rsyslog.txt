@@ -1,0 +1,21 @@
+emerg 系统已经不可用，级别为紧急 
+alert 警报，需要立即处理和解决 
+crit 既将发生，得需要预防。事件就要发生 
+warnig 警告 
+err 错误信息，普通的错误信息 
+notice 提醒信息，很重要的信息 
+info 通知信息，属于一般信息 
+debug 这是调试类信息
+vi /etc/syslog.conf
+在第一行加入local3.none,使得设备local3的日志不记录在messages文件里，
+*.info;mail.none;authpriv.none;cron.none;local1.none;local3.none /var/log/messages
+
+
+local3.* /var/log/userlog
+
+service syslog reload
+
+logger -p local4.notice "assd"
+
+local3.*  @192.168.1.16  发送另外一台
+

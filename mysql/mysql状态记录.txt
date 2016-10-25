@@ -1,0 +1,54 @@
+联合索引
+SELECT * FROM payment WHERE staff_id = 2 AND customer_id = 584;
+SELECT count(DISTINCT customer_id) , count(DISTINCT staff_id) FROM payment; -- 结果是 599 2
+由于 customer_id 的离散度更大，所以应该使用 index(customer_id,staff_id)
+
+
+http://blog.csdn.net/ls3648098/article/details/9293643
+show status like 'table%'
+
+show status like 'key%'; myisam
+(命中率的值)
+key_buffer_read_hits=(1-key_reads/key_read_requests) * 100%
+key_buffer_write_hits=(1-key_writes/key-write-requests)*100%
+
+
+show status like 'innodb_row_lock%'
+
+show status like 'innodb_buffer_pool_read%';  innodb buffer 命中率
+innodb_buffer_read_hits=(1-innodb_buffer_pool_reads/innodb_buffer_pool_read_requests) * 100%;
+
+show status like 'Qcache%';  query cache命中率
+query_cache_hits =(Qcache_hits/(Qcache_hits+Qcache_inserts))* 100%;
+
+
+show status like 'open%'; table_cache 命中率
+
+
+show status like 'thread%'; thread cache命中率(正常来说，thread cache命中率在90%以上才算合理。)
+thread_cache_hits = (1- threads_created/connections) * 100 %;
+
+
+tmp table相关状况分析  show status like 'created_tmp%';
+Created_tmp_disk_tables为临时表过大无法在内存中完成，而不得不使用磁盘的次数。若create_tmp_tables非常大，则可甬系统排序操作过多，或者可能是连接方式不是很优化。而如果是create_tmp_dis_table/create_tmp_tables比率过高，如超过10%，则需要考虑tmp_table_size参数是否需要调整大些。建议tmp_table_size与max_heap_table_size需要设置成一样大。
+
+
+ show status like 'binlog_cache%';binlog cache
+若打开binlog日志功能，则需要考虑binlog cache问题。binlog不是一有数据就写到binlog中，而是先写入到binlog cache中，再写入到binlog中。
+ Binlog_cache_disk_use为binlog使用硬盘使用量， Binlog_cache_use  为binlog已使用的量。若 Binlog_cache_disk_use大于0，则说明binlog_cache不够用。
+
+
+ show status like '%lock%';
+
+如当Table_locks_waited与Table_locks_immediate的比值较大，则说明我们的表锁造成的阻塞比较严重，可能需要调整Query语句，或者更改存储引擎，亦或者需要调整业务逻辑。当然，具体改善方式必须根据实际场景来判断。而Innodb_row_lock_waits较大，则说明Innodb的行锁也比较严重，且影响了其他线程的正常处理。同样需要查找出原因并解决。造成Innodb行锁严重的原因可能是Query语句所利用的索引不够合理（Innodb行锁是基于索引来锁定的），造成间隙锁过大。也可能是系统本身处理能力有限，则需要从其他方面来考虑解决。
+
+
+
+Optimize Table  OPTIMIZE TABLE只对MyISAM, BDB和InnoDB表起作用。
+经常更新数据的磁盘需要整理碎片，数据库也是这样，Optimize Table语句对MyISAM和InnoDB类型的表都有效。
+如果表经常更新，就应当定期运行Optimize Table语句，保证效率。
+与Analyze Table一样，Optimize Table也可以使用local来取消写入binlog。  会锁表
+
+Check Table   对myisam  和 innodb
+
+analyze  table

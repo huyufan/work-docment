@@ -1,0 +1,3 @@
+ps -ef | grep php-fpm
+
+ps -eo | pid,comm,cmd 

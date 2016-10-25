@@ -1,0 +1,4 @@
+ls > a.log  输出到a.log   ls >> a.log  叠加  cd  sddsd >& a.log   错误输入到a.log
+
+
+cat < a.log   输入      

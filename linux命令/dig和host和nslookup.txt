@@ -1,0 +1,3 @@
+http://www.phpchina.com/article-40004-2.html
+
+yum install bind-utils
