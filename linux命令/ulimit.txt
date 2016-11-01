@@ -1,5 +1,5 @@
 ulimit -a
-
+http://blog.csdn.net/superchanon/article/details/13303705/
 ulimit -c unlimited ¿ªÆôcoreµÄ
 
 ulimit -c 0  ¹Ø±Õ

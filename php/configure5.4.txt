@@ -83,3 +83,256 @@ make ZEND_EXTRA_LIBS='-liconv'
 
 
 sapi/fpm
+SAPI modules(PHP SAPI接口模块的选项):
+  --with-aolserver=DIR    AOLserver的安装路径
+  --with-apxs=FILE        编译出apache1.x版本的共享模块所存放的路径
+  --with-apache=DIR       编译出apache1.x版本的模块,这里设定为apache软件根目录
+  --enable-mod-charset    启用apache的mod_charset(俄文apache用的)
+  --with-apxs2filter=FILE 编译apache2.0的共享过滤模块,这里设定为apache apxs工具的路径
+  --with-apxs2=FILE       编译共享apache2.0处理程序的模块,这里设定为apache apxs工具的路径
+  --with-apache-hooks=FILE共享的apache1.0的钩子模块,这里设定为apache apxs工具的路径
+  --with-apache-hooks-static=DIR 这里设定为apache apxs工具的路径
+  --disable-cli           禁用命令行模式(php-cli)
+  --with-continuity=DIR   编译php为连续服务模块。参数为安装Continuity Server的根目录
+  --enable-embed=TYPE     建立内嵌的SAPI库。参数为shared、static
+  --enable-fpm            开启fpm模式(nginx等服务用的)
+  --with-fpm-user=USER    fpm运行的用户,默认为nobody
+  --with-fpm-group=GRP    fpm运行的组,默认为nobody
+  --with-fpm-systemd      激活系统集成功能,开启后fpm可以上报给系统一些信息
+  --with-fpm-acl          使用POSIX 访问控制列表,5.6.5版本起有效
+  --with-isapi=DIR        为Zeus web服务器建立ISAPI模块
+  --with-litespeed        编译PHP为litespeed模块
+  --with-milter=DIR       编译PHP为Milter应用程序
+  --with-nsapi=DIR        为Netscape/iPlanet/Sun Web服务器编译PHP为NSAPI模块
+  --enable-phpdbg         编译开启phpdbg调试器
+  --enable-phpdbg-debug   编译phpdbg调试器为debug模式
+  --with-phttpd=DIR       编译PHP为phttpd模块
+  --with-pi3web=DIR       编译PHP为pi3web模块
+  --with-roxen=DIR        编译PHP为roxen模块
+  --enable-roxen-zts      编译PHP为roxen模块,线程安全
+  --with-thttpd=SRCDIR    编译PHP为thttpd模块
+  --with-tux=MODULEDIR    编译PHP为tux模块
+  --with-webjames=SRCDIR  编译PHP为webjames模块
+  --disable-cgi           禁用cgi
+  
+  General settings(综合设置):
+  --enable-gcov           开启gcov支持(测试代码覆盖率功能,)
+  --enable-debug          Compile with debugging symbols
+  --with-layout=TYPE      Set how installed files will be laid out.  Type can
+                          be either PHP or GNU [PHP]
+  --with-config-file-path=PATH php.ini文件位置[PREFIX/lib]
+  --with-config-file-scan-dir=PATH 扫描配置文件的路径
+  --enable-sigchild       使用PHP自带的SIGCHLD处理器
+  --enable-libgcc         启用libgcc的精确链接
+  --disable-short-tags    默认禁用短形式的<?作为php代码的开始标记
+  --enable-dmalloc        启用dmalloc（dmalloc是Linux C编程侦测记忆体溢出工具）
+  --disable-ipv6          关闭ipv6支持
+  --enable-dtrace         开启DTrace(动态跟踪)支持
+  --enable-fd-setsize     设置描述集的大小
+  
+  
+  Extensions(扩展):
+
+
+  --with-EXTENSION=shared[,PATH]
+
+    并非所有扩展都能编译成共享方式
+    NOTE: Not all extensions can be build as 'shared'.
+
+    给个例子,如何把扩展编译成共享模式:
+    Example: --with-foobar=shared,/usr/local/foobar/
+
+      o Builds the foobar extension as shared extension.
+      o foobar package install prefix is /usr/local/foobar/
+
+
+  --disable-all           关闭默认为启用的所有扩展功能
+  --with-regex=TYPE       正则表达式库类型。选项:system|php(默认) 警告:如果你不知道这是干嘛的就别动这个选项了!
+  --disable-libxml        禁用LIBXML支持
+  --with-libxml-dir=DIR   LIBXML安装目录
+  --with-openssl=DIR      启用openssl支持 (OpenSSL版本号必须大于等于 0.9.6)
+  --with-kerberos=DIR     OPENSSL: 包含kerberos支持
+  --with-system-ciphers   OPENSSL: 用系统自带的密码清单(cipher list)去替代硬编码(hard coded)
+  --with-pcre-regex=DIR   引用pear兼容的正则表达式库
+  --without-sqlite3=DIR   不开启sqlite3支持
+  --with-zlib=DIR         开启ZLIB支持 (ZLIB版本号必须大于等于 1.0.9)
+  --with-zlib-dir=<DIR>   ZLIB的安装路径
+  --enable-bcmath         启用bcmatch（公元前风格精度数学）
+  --with-bz2=DIR          开启BZip2
+  --enable-calendar       启用日历转换支持
+  --disable-ctype         禁用ctype功能
+  --with-curl=DIR         启用cURL支持
+  --enable-dba            构架捆绑模块的DBA。要建立扩展的共享模块使用--enable-dba=shared参数。
+  --with-qdbm=DIR         DBA: QDBM support
+  --with-gdbm=DIR         DBA: GDBM support
+  --with-ndbm=DIR         DBA: NDBM support
+  --with-db4=DIR          DBA: Oracle Berkeley DB 4.x or 5.x support
+  --with-db3=DIR          DBA: Oracle Berkeley DB 3.x support
+  --with-db2=DIR          DBA: Oracle Berkeley DB 2.x support
+  --with-db1=DIR          DBA: Oracle Berkeley DB 1.x support/emulation
+  --with-dbm=DIR          DBA: DBM support
+  --with-tcadb=DIR        DBA: Tokyo Cabinet abstract DB support
+  --without-cdb=DIR       DBA: CDB support (bundled)（捆绑方式）
+  --disable-inifile       DBA: INI support (bundled)（捆绑方式）
+  --disable-flatfile      DBA: FlatFile support (bundled)（捆绑方式）
+  --disable-dom           禁用DOM支持
+  --with-libxml-dir=DIR   DOM: 启用libxml2并指定其安装目录
+  --with-enchant=DIR      启用 enchant 支持.GNU Aspell 版本号必须高于 1.1.3
+  --enable-exif           启用EXIF支持（从图片中获取元数据）
+  --disable-fileinfo      关闭fileinfo支持
+  --disable-filter        关闭 input filter 支持
+  --with-pcre-dir         FILTER: pcre install prefix
+  --enable-ftp            开启ftp支持
+  --with-openssl-dir=DIR  FTP: openssl install prefix
+  --with-gd=DIR           开启GD图像处理库
+  --with-vpx-dir=DIR      GD: 指定libvpx的安装目录
+  --with-jpeg-dir=DIR     GD: 指定libjpeg的安装目录
+  --with-png-dir=DIR      GD: 指定libpng的安装目录
+  --with-zlib-dir=DIR     GD: 指定libz的安装目录
+  --with-xpm-dir=DIR      GD: 指定libXpm的安装目录
+  --with-freetype-dir=DIR GD: 指定FreeType2的安装目录
+  --with-t1lib=DIR        GD: 指定T1lib支持
+  --enable-gd-native-ttf  GD: 启用TureType字符功能
+  --enable-gd-jis-conv    GD: 启用JIS-mapped日语字体支持
+  --with-gettext=DIR      包含GNU gettext支持
+  --with-gmp=DIR          启用GNU MP支持
+  --with-mhash=DIR        指定mhash的目录
+  --disable-hash          禁用hash支持
+  --without-iconv=DIR     禁用iconv支持
+  --with-imap=DIR         包含IMAP支持。指定c-client安装目录
+  --with-kerberos=DIR     IMAP: 启用kerberos支持并指定其目录
+  --with-imap-ssl=DIR     IMAP: 启用ssl支持并指定openssl目录
+  --with-interbase=DIR    启用interbase支持并指定其目录
+  --enable-intl           开启国际化支持(internationalization)
+  --with-icu-dir=DIR      Specify where ICU libraries and headers can be found
+  --disable-json          关闭json支持
+  --with-ldap=DIR         开启 LDAP 支持
+  --with-ldap-sasl=DIR    LDAP: 开启 Cyrus SASL 支持
+  --enable-mbstring       启用多字节字符串的支持
+  --disable-mbregex       MBSTRING: 禁用多字节正则表达式的支持
+  --disable-mbregex-backtrack MBSTRING: 禁用多字节正则表达式回溯检查
+  --with-libmbfl=DIR      MBSTRING: 使用外部的libmbfl并制定其目录
+  --with-onig=DIR         MBSTRING: 使用外部的onig并制定其目录
+  --with-mcrypt=DIR       包含mcrypt支持
+  --with-mssql=DIR        包含MSSQL-DB支持，并指定FreeTDS软件目录
+  --with-mysql-sock=SOCKPATH 定位mysql的unix 套接字指针。如果未指定，则按默认位置搜索。
+  --with-zlib-dir=DIR     MySQL: 设置zlib的安装目录
+  --with-mysqli=FILE      包含MySQLi支持。参数为mysql_config的位置
+  --enable-embedded-mysqli MYSQLi: 启用embedded支持。
+  --with-oci8=DIR         包含Oracle支持。如果使用Oracle客户端安装则使用--with-oci8=instantclient,/path/to/oic/lib
+  --with-odbcver=HEX      Force support for the passed ODBC version. A hex number is expected, default 0x0300.
+                             Use the special value of 0 to prevent an explicit ODBCVER to be defined.
+  --with-adabas=DIR       Include Adabas D support /usr/local
+  --with-sapdb=DIR        Include SAP DB support /usr/local
+  --with-solid=DIR        Include Solid support /usr/local/solid
+  --with-ibm-db2=DIR      Include IBM DB2 support /home/db2inst1/sqllib
+  --with-ODBCRouter=DIR   Include ODBCRouter.com support /usr
+  --with-empress=DIR      Include Empress support \$EMPRESSPATH
+                          (Empress Version >= 8.60 required)
+  --with-empress-bcs=DIR
+                          Include Empress Local Access support \$EMPRESSPATH
+                          (Empress Version >= 8.60 required)
+  --with-birdstep=DIR     Include Birdstep support /usr/local/birdstep
+  --with-custom-odbc=DIR  Include user defined ODBC support. DIR is ODBC install base
+                          directory /usr/local. Make sure to define CUSTOM_ODBC_LIBS and
+                          have some odbc.h in your include dirs. f.e. you should define
+                          following for Sybase SQL Anywhere 5.5.00 on QNX, prior to
+                          running this configure script:
+                            CPPFLAGS=\"-DODBC_QNX -DSQLANY_BUG\"
+                            LDFLAGS=-lunix
+                            CUSTOM_ODBC_LIBS=\"-ldblib -lodbc\"
+  --with-iodbc=DIR        Include iODBC support /usr/local
+  --with-esoob=DIR        Include Easysoft OOB support /usr/local/easysoft/oob/client
+  --with-unixODBC=DIR     Include unixODBC support /usr/local
+  --with-dbmaker=DIR      Include DBMaker support
+  --enable-opcache        Enable Zend OPcache support
+  --enable-pcntl          Enable pcntl support (CLI/CGI only)
+  --disable-pdo           Disable PHP Data Objects support
+  --with-pdo-dblib=DIR    PDO: DBLIB-DB support.  DIR is the FreeTDS home directory
+  --with-pdo-firebird=DIR PDO: Firebird support.  DIR is the Firebird base
+                          install directory /opt/firebird
+  --with-pdo-mysql=DIR    PDO: MySQL support. DIR is the MySQL base directory
+                          If no value or mysqlnd is passed as DIR, the
+                          MySQL native driver will be used
+  --with-zlib-dir=DIR     PDO_MySQL: Set the path to libz install prefix
+  --with-pdo-oci=DIR      PDO: Oracle OCI support. DIR defaults to \$ORACLE_HOME.
+                          Use --with-pdo-oci=instantclient,prefix,version
+                          for an Oracle Instant Client SDK.
+                          For example on Linux with 11.2 RPMs use:
+                            --with-pdo-oci=instantclient,/usr,11.2
+                          With 10.2 RPMs use:
+                            --with-pdo-oci=instantclient,/usr,10.2.0.4
+  --with-pdo-odbc=flavour,dir
+                          PDO: Support for 'flavour' ODBC driver.
+              include and lib dirs are looked for under 'dir'.
+
+              'flavour' can be one of:  ibm-db2, iODBC, unixODBC, generic
+              If ',dir' part is omitted, default for the flavour
+              you have selected will be used. e.g.:
+
+                --with-pdo-odbc=unixODBC
+
+              will check for unixODBC under /usr/local. You may attempt
+              to use an otherwise unsupported driver using the \"generic\"
+              flavour.  The syntax for generic ODBC support is:
+
+                --with-pdo-odbc=generic,dir,libname,ldflags,cflags
+
+              When built as 'shared' the extension filename is always pdo_odbc.so
+  --with-pdo-pgsql=DIR    PDO: PostgreSQL support.  DIR is the PostgreSQL base
+                          install directory or the path to pg_config
+  --without-pdo-sqlite=DIR
+                          PDO: sqlite 3 support.  DIR is the sqlite base
+                          install directory BUNDLED
+  --with-pgsql=DIR        Include PostgreSQL support.  DIR is the PostgreSQL
+                          base install directory or the path to pg_config
+  --disable-phar          Disable phar support
+  --disable-posix         Disable POSIX-like functions
+  --with-pspell=DIR       Include PSPELL support.
+                          GNU Aspell version 0.50.0 or higher required
+  --with-libedit=DIR      Include libedit readline replacement (CLI/CGI only)
+  --with-readline=DIR     Include readline support (CLI/CGI only)
+  --with-recode=DIR       Include recode support
+  --disable-session       Disable session support
+  --with-mm=DIR           SESSION: Include mm support for session storage
+  --enable-shmop          Enable shmop support
+  --disable-simplexml     Disable SimpleXML support
+  --with-libxml-dir=DIR   SimpleXML: libxml2 install prefix
+  --with-snmp=DIR         Include SNMP support
+  --with-openssl-dir=DIR  SNMP: openssl install prefix
+  --enable-soap           Enable SOAP support
+  --with-libxml-dir=DIR   SOAP: libxml2 install prefix
+  --enable-sockets        Enable sockets support
+  --with-sybase-ct=DIR    Include Sybase-CT support.  DIR is the Sybase home
+                          directory /home/sybase
+  --enable-sysvmsg        Enable sysvmsg support
+  --enable-sysvsem        Enable System V semaphore support
+  --enable-sysvshm        Enable the System V shared memory support
+  --with-tidy=DIR         Include TIDY support
+  --disable-tokenizer     Disable tokenizer support
+  --enable-wddx           Enable WDDX support
+  --with-libxml-dir=DIR   WDDX: libxml2 install prefix
+  --with-libexpat-dir=DIR WDDX: libexpat dir for XMLRPC-EPI (deprecated)
+  --disable-xml           Disable XML support
+  --with-libxml-dir=DIR   XML: libxml2 install prefix
+  --with-libexpat-dir=DIR XML: libexpat install prefix (deprecated)
+  --disable-xmlreader     Disable XMLReader support
+  --with-libxml-dir=DIR   XMLReader: libxml2 install prefix
+  --with-xmlrpc=DIR       Include XMLRPC-EPI support
+  --with-libxml-dir=DIR   XMLRPC-EPI: libxml2 install prefix
+  --with-libexpat-dir=DIR XMLRPC-EPI: libexpat dir for XMLRPC-EPI (deprecated)
+  --with-iconv-dir=DIR    XMLRPC-EPI: iconv dir for XMLRPC-EPI
+  --disable-xmlwriter     Disable XMLWriter support
+  --with-libxml-dir=DIR   XMLWriter: libxml2 install prefix
+  --with-xsl=DIR          Include XSL support.  DIR is the libxslt base
+                          install directory (libxslt >= 1.1.0 required)
+  --enable-zip            Include Zip read/write support
+  --with-zlib-dir=DIR     ZIP: Set the path to libz install prefix
+  --with-pcre-dir         ZIP: pcre install prefix
+  --with-libzip=DIR       ZIP: use libzip
+  --enable-mysqlnd        Enable mysqlnd explicitly, will be done implicitly
+                          when required by other extensions
+  --disable-mysqlnd-compression-support
+                          Disable support for the MySQL compressed protocol in mysqlnd
+  --with-zlib-dir=DIR     mysqlnd: Set the path to libz install prefix
+
