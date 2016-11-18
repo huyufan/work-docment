@@ -1,0 +1,10 @@
+http://www.xiaobo.li/php/427.html?utm_source=tool.lu
+
+http://blog.jiunile.com/%E8%BF%BD%E8%B8%AAphp%E4%BB%A3%E7%A0%81%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88.html
+
+ох time  php in.php
+strace -ttt -o xxx php in.php
+less xxx
+
+ltrace -c php in.php
+ltrace -e "" php in.php
