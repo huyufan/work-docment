@@ -58,3 +58,12 @@ git remote add origin git@github.com:michaelliao/learngit.git   Ìí¼ÓÔ¶³Ì²Ö¿â
 
 
 rm test.php É¾³ý    git checkout test.php  ·µ»Ø
+
+http://www.letuknowit.com/post/144.html 
+git stach
+git pull
+git stash pop
+
+
+git reset --hard
+git pull

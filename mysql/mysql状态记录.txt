@@ -3,6 +3,7 @@ SELECT * FROM payment WHERE staff_id = 2 AND customer_id = 584;
 SELECT count(DISTINCT customer_id) , count(DISTINCT staff_id) FROM payment; -- 结果是 599 2
 由于 customer_id 的离散度更大，所以应该使用 index(customer_id,staff_id)
 
+show innodb status  高版本是 show engine innodb status
 
 http://blog.csdn.net/ls3648098/article/details/9293643
 show status like 'table%'
