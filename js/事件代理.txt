@@ -1,0 +1,13 @@
+事件冒泡
+
+// 获取父节点，并为它添加一个click事件
+document.getElementById("parent-list").addEventListener("click",function(e) {
+  // 检查事件源e.targe是否为Li
+  if(e.target && e.target.nodeName.toUpperCase == "LI") {
+    // 真正的处理过程在这里
+    console.log("List item ",e.target.id.replace("post-")," was clicked!");
+  }
+});
+
+http://www.th7.cn/web/js/201603/160003.shtml
+http://bin-playground.top/#/blog/2014/06/16/frontend-optimization-javascript-dom/
