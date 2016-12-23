@@ -1,0 +1,12 @@
+<?php
+$s=0;
+if(STDIN){
+$output=array();
+while(!feof(STDIN)){
+$line=fgets(STDIN);
+if($line){
+$output=$line;
+}
+}
+print_r($output);
+}
