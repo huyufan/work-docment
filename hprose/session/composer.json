@@ -1,0 +1,14 @@
+{
+    "name": "andot/session",
+    "description": "Session",
+    "type": "project",
+    "require": {
+        "hprose/hprose": "^2.0"
+    },
+    "authors": [
+        {
+            "name": "Ma Bingyao",
+            "email": "mabingyao@gmail.com"
+        }
+    ]
+}

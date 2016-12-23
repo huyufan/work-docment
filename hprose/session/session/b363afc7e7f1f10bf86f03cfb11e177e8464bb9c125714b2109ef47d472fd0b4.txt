@@ -1,0 +1,1 @@
+m6{s8"username"s5"admin"s8"password"r2;s10"login_time"i1480906647;s5"roles"a1{s3"god"}s11"permissions"a5{12345}s16"last_access_time"i1480906647;}

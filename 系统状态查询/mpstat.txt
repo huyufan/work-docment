@@ -1,0 +1,1 @@
+mpstat -P ALL  查看cpu的负载情况
