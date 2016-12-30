@@ -1,0 +1,1 @@
+Mtr是 Linux中有一个非常棒的网络连通性判断工具，它结合了ping, traceroute,nslookup 的相关特性。
