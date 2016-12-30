@@ -1,1 +1,1 @@
-mpstat -P ALL  查看cpu的负载情况
+mpstat -P ALL  查看cpu的负载情况  1(每秒) 10(次)

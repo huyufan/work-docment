@@ -1,1 +1,4 @@
 pidstat 1
+
+
+pidstat | grep php-fpm | awk '{print $(NF-1)}' | sort | uniq -c
