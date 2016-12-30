@@ -1,0 +1,40 @@
+{
+"configs" : [
+  {
+"server" : "jp01-33.ssv7.net",
+"server_port" : 42092,
+"password" : "fdKpCqFXRgBr",
+"method" : "aes-256-cfb",
+"remarks" : ""}
+,
+  {
+"server" : "hk02-33.ssv7.net",
+"server_port" : 42092,
+"password" : "fdKpCqFXRgBr",
+"method" : "aes-256-cfb",
+"remarks" : ""}
+,
+  {
+"server" : "sg02-33.ssv7.net",
+"server_port" : 42092,
+"password" : "fdKpCqFXRgBr",
+"method" : "aes-256-cfb",
+"remarks" : ""}
+,
+  {
+"server" : "us03-33.ssv7.net",
+"server_port" : 42092,
+"password" : "fdKpCqFXRgBr",
+"method" : "aes-256-cfb",
+"remarks" : ""}
+
+],
+"strategy" : null,
+"index" : 3,
+"global" : false,
+"enabled" : true,
+"shareOverLan" : false,
+"isDefault" : false,
+"localPort" : 1080,
+"pacUrl" : null,
+"useOnlinePac" : false}
