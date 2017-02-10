@@ -1,8 +1,10 @@
+http://blog.csdn.net/alongken2005/article/details/6394016
 show index from hg_order(表)  cardinality（可以翻译为“散列程度”）如果cardinality大大少于数据的实际散列程度，那么索引就基本失效了。
 
 语句用于分析和存储表的关键字分布。在分析期间，使用一个读取锁定对表进行锁定。这对于MyISAM, BDB和InnoDB表有作用。对于MyISAM表，本语句与使用myisamchk -a相当。
 MySQL使用已存储的关键字分布来决定，当您对除常数以外的对象执行联合时，表按什么顺序进行联合
 
+需要注意的是，如果开启了binlog，那么Analyze Table的结果也会写入binlog，我们可以在analyze和table之间添加关键字local取消写入。
  analyze table a; 定期分析表
 
 
