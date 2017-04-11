@@ -1,1 +1,1 @@
-kill -HUP Ö÷½ø³Ì
+kill -HUP ä¸»è¿›ç¨‹

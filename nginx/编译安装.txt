@@ -8,6 +8,8 @@ http://www.jb51.net/article/49479.htm
 
 ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.38.tar.gz
 
+wget http://www.openssl.org/source/openssl-1.0.1c.tar.gz
+ 
 http://zlib.net/zlib-1.2.8.tar.gz
 
 pcre: 用来作地址重写的功能。
