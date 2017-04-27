@@ -1,1 +1,5 @@
 http://blog.csdn.net/yhl27/article/details/9936189
+
+http://www.runoob.com/redis/redis-strings.html
+
+redis-cli keys "*"|xargs redis-cli del  (删除所有的key)

@@ -4,7 +4,7 @@ yum install tcl
 
 http://www.cnblogs.com/wenanry/archive/2012/02/26/2368398.html
 
-make make test make PREFIX=/usr/local/redis
+make make test make PREFIX=/usr/local/redis  install
 
 
 redis-server /etc/redis.conf 
@@ -23,6 +23,48 @@ info
 
 auth
 
+
+3个警告
+第一个警告：The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+意思是：TCP  backlog设置值，511没有成功，因为 /proc/sys/net/core/somaxconn这个设置的是更小的128.
+临时解决方法：（即下次启动还需要修改此值）
+echo 511 > /proc/sys/net/core/somaxconn
+永久解决方法：（即以后启动还需要修改此值）
+将其写入/etc/rc.local文件中。
+baklog参数实际控制的是已经3次握手成功的还在accept queue的大小。
+
+意思是：overcommit_memory参数设置为0！在内存不足的情况下，后台程序save可能失败。建议在文件 /etc/sysctl.conf 中将overcommit_memory修改为1。
+临时解决方法：echo "vm.overcommit_memory=1" > /etc/sysctl.conf
+永久解决方法：将其写入/etc/sysctl.conf文件中。
+
+
+意思是：你使用的是透明大页，可能导致redis延迟和内存使用问题。执行 echo never > /sys/kernel/mm/transparent_hugepage/enabled 修复该问题。
+临时解决方法：
+echo never > /sys/kernel/mm/transparent_hugepage/enabled。
+永久解决方法：
+将其写入/etc/rc.local文件中。
+
+
+echo 2048 >   /proc/sys/net/core/somaxconn    但是这样系统重启后保存不了
+
+在/etc/sysctl.conf中添加如下
+
+net.core.somaxconn = 511
+vm.overcommit_memory=1
+
+sysctl -p
+
+
+vim /etc/rc.d/rc.local
+增加下列内容：
+
+if test -f /sys/kernel/mm/transparent_hugepage/enabled; then
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
+fi
+if test -f /sys/kernel/mm/transparent_hugepage/defrag; then
+echo never > /sys/kernel/mm/transparent_hugepage/defrag
+fi
+保存退出，然后赋予rc.
 
  
 
