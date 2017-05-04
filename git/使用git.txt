@@ -1,18 +1,18 @@
-°²×°²Ö¿â  git init  »òÕß git  init --bare 
+å®‰è£…ä»“åº“  git init  æˆ–è€… git  init --bare 
 
 chown -R git:git sample.git
 
 git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell
 
 
-¿Í»§¶Ë  git clone git@server:/srv/sample.git
+å®¢æˆ·ç«¯  git clone git@server:/srv/sample.git
 
 
-git log  ºÍ  git reflog
+git log  å’Œ  git reflog
 
 
 
-git reset --hard ×îĞÂ (×Ô¼ºµÄ¼ÇÂ¼)
+git reset --hard æœ€æ–° (è‡ªå·±çš„è®°å½•)
 
 
 git  push origin master
@@ -33,12 +33,12 @@ git  checkout
 git pull
 
 
-ÓÃ»§   ÓÃ git-shell µÇÂ¼  /usr/local/git/bin
+ç”¨æˆ·   ç”¨ git-shell ç™»å½•  /usr/local/git/bin
 
- git push -u origin master -f   Ç¿ÖÆÌá½»
+ git push -u origin master -f   å¼ºåˆ¶æäº¤
 
 
-git push -u origin master  //Ô¶³Ì¿âÊÇ¿Õ  ÎÒÃÇµÚÒ»´ÎÍÆËÍmaster·ÖÖ§Ê±£¬¼ÓÉÏÁË-u²ÎÊı
+git push -u origin master  //è¿œç¨‹åº“æ˜¯ç©º  æˆ‘ä»¬ç¬¬ä¸€æ¬¡æ¨é€masteråˆ†æ”¯æ—¶ï¼ŒåŠ ä¸Šäº†-uå‚æ•°
 
 
 git fetch origin master
@@ -47,17 +47,17 @@ git merge origin/master
 
 
 
-git remote add origin git@github.com:michaelliao/learngit.git   Ìí¼ÓÔ¶³Ì²Ö¿â
+git remote add origin git@github.com:michaelliao/learngit.git   æ·»åŠ è¿œç¨‹ä»“åº“
 
 
 
-·½·¨: git commit --amend »ò git commit --amend -m "Fixes bug #42"
+æ–¹æ³•: git commit --amend æˆ– git commit --amend -m "Fixes bug #42"
 
-Ô­Àí: git commit --amend »áÓÃÒ»¸öĞÂµÄ commit ¸üĞÂ²¢Ìæ»»×î½üµÄ commit £¬Õâ¸öĞÂµÄ commit »á°ÑÈÎºÎĞŞ¸ÄÄÚÈİºÍÉÏÒ»¸ö commit µÄÄÚÈİ½áºÏÆğÀ´¡£Èç¹ûµ±Ç°Ã»ÓĞÌá³öÈÎºÎĞŞ¸Ä£¬Õâ¸ö²Ù×÷¾ÍÖ»»á°ÑÉÏ´ÎµÄ commit ÏûÏ¢ÖØĞ´Ò»±é¡£
+åŸç†: git commit --amend ä¼šç”¨ä¸€ä¸ªæ–°çš„ commit æ›´æ–°å¹¶æ›¿æ¢æœ€è¿‘çš„ commit ï¼Œè¿™ä¸ªæ–°çš„ commit ä¼šæŠŠä»»ä½•ä¿®æ”¹å†…å®¹å’Œä¸Šä¸€ä¸ª commit çš„å†…å®¹ç»“åˆèµ·æ¥ã€‚å¦‚æœå½“å‰æ²¡æœ‰æå‡ºä»»ä½•ä¿®æ”¹ï¼Œè¿™ä¸ªæ“ä½œå°±åªä¼šæŠŠä¸Šæ¬¡çš„ commit æ¶ˆæ¯é‡å†™ä¸€éã€‚
 
 
 
-rm test.php É¾³ı    git checkout test.php  ·µ»Ø
+rm test.php åˆ é™¤    git checkout test.php  è¿”å›
 
 http://www.letuknowit.com/post/144.html 
 git stach
@@ -67,3 +67,5 @@ git stash pop
 
 git reset --hard
 git pull
+
+git branch --set-upstream-to=origin/<branch> test
