@@ -1,4 +1,8 @@
 yum install sysstat
 
 
-iostat�����봦����Ԫ��CPU����ͳ�����ݺ��豸����������/���ͳ����Ϣ��
+iostat：中央处理单元（CPU）的统计数据和设备、分区输入/输出统计信息。
+
+iostat -d -k 1 10        #查看TPS和吞吐量信息
+iostat -d -x -k 1 10      #查看设备使用率（%util）、响应时间（await）
+iostat -c 1 10            #查看cpu状态
