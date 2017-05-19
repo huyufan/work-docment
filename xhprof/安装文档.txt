@@ -10,3 +10,22 @@ https://laravel-china.org/topics/3142
 
 
 需要在github上下载hhttps://github.com/phacility/xhprof.git。
+
+
+//开启xhprof
+xhprof_enable(XHPROF_FLAGS_MEMORY | XHPROF_FLAGS_CPU);
+//在程序结束后收集数据
+register_shutdown_function(function() {
+    $xhprof_data        = xhprof_disable();
+
+    //让数据收集程序在后台运行
+    if (function_exists('fastcgi_finish_request')) {
+        fastcgi_finish_request();
+    }
+
+    //保存xhprof数据
+    ...
+});
+修改php.ini  auto_prepend_file = /opt/inject.php
+
+http://www.cleey.com/blog/single/id/439.html
