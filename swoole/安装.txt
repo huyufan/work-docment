@@ -18,6 +18,9 @@ extension=swoole.so
 
 php -m
 
+安装redis的时候 https://github.com/redis/hiredis  异步redis   
+安装 re2c
+
 
 
 

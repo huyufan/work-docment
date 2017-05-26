@@ -41,9 +41,11 @@ git pull
 git push -u origin master  //远程库是空  我们第一次推送master分支时，加上了-u参数
 
 
-git fetch origin master
-git log -p master..origin/master
-git merge origin/master
+git fetch origin master 从远程的origin仓库的master主分支更新最新的版本到origin/master分支上
+git log -p master..origin/master 比较本地的master分支和origin/master分支的差别
+git merge origin/master 合并内容到本地master分支
+
+
 
 
 
